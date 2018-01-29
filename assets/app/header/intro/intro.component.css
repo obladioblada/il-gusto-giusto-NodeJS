@@ -1,0 +1,49 @@
+#cofano.intro{
+  max-height: 500px ;
+  max-width: 500px ;
+  margin: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+}
+
+#cofano.intro-header{
+  max-height: 80px;
+  max-width: 80px;
+  margin: auto;
+  position: fixed;
+  top: 5px;
+  left: 25px;
+  -webkit-transform: none;
+  transform: none;
+}
+
+
+/* ----- mobile ---- */
+@media only screen and (max-width: 500px) {
+  #cofano.intro{
+    max-height: 300px ;
+    max-width: 500px ;
+    margin: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
+
+  #cofano.intro-header{
+    max-height: 50px;
+    max-width: 50px;
+    margin: auto;
+    position: fixed;
+    top: 20px;
+    left: 10px;
+    -webkit-transform: none;
+    transform: none;
+  }
+}

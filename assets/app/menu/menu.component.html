@@ -1,0 +1,24 @@
+<mat-tab-group class="demo-tab-group" [ngClass]=" trayEmpty  ? 'vassoio-empty' : 'vassoio-no-empty'">
+  <mat-tab label="PANINI ">
+    <div class="container list">
+        <app-prodotto  class="card-container col-lg-3 col-md-3 col-xs-12 col-sm-4 " *ngFor="let item of panini"
+                       [prodotto]="item">
+        </app-prodotto>
+    </div>
+  </mat-tab>
+  <mat-tab label="GASTRONOMIA">
+    <div class="container list" >
+      <app-prodotto  class="card-container col-lg-3 col-md-3 col-xs-12 col-sm-4 " *ngFor="let item of gastronomia"
+                       [prodotto]="item">
+      </app-prodotto>
+    </div>
+  </mat-tab>
+  <mat-tab label="BEVANDE">
+      <div class="container list">
+        <app-prodotto  class="card-container col-lg-3 col-md-3 col-xs-12 col-sm-4 " *ngFor="let item of bevande"
+                       [prodotto]="item">
+        </app-prodotto>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<app-footer-vassoio></app-footer-vassoio>

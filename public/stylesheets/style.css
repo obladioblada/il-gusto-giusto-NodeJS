@@ -1,0 +1,195 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root {
+  --main-color-blue: #9ad8ed;
+  --main-color-red: #b33c46;
+  --menu-height : 50px;
+
+}
+
+
+html,
+body{
+  height: 100% !important;
+
+}
+/* You can add global styles to this file, and also import other style files */
+
+html{ overflow: hidden;}
+
+body{
+  overflow: scroll !important;
+  background-color: white !important;
+  font-family: 'Roboto', sans-serif !important;
+  animation-name: changeBodyBg;
+  animation-duration: 3s;
+  animation-delay: 6s;
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+  -moz-animation-fill-mode:forwards; /*FF 5+*/
+  -o-animation-fill-mode:forwards; /*Not implemented yet*/
+  animation-fill-mode:forwards; /*when the spec is finished*/
+}
+
+
+.mat-ink-bar {
+  background-color: var(--main-color-red)  !important;
+}
+
+.mat-card>.mat-card-actions:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0;
+}
+
+.my-toggle{
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+
+.mat-card:not([class*=mat-elevation-z]):hover{
+  box-shadow: 1px 3px 10px 5px rgba(0,0,0,.20), 0 2px 2px 0 rgba(0,0,0,.20), 0 1px 5px 0 rgba(0,0,0,.20);
+
+}
+
+
+/* The animation code */
+@keyframes changeBodyBg {
+  from {background-color: white;}
+  to {background-color: rgba(255, 255, 255, 0.83);}
+}
+
+.mat-tab-header,.mat-horizontal-stepper-header-container{
+  box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28) !important;
+
+}
+
+
+.card-container{
+  margin-bottom: 24px;
+}
+
+
+.mat-card{
+  padding-bottom: 12px !important;
+}
+
+
+.mat-card-image{
+  object-fit: cover !important; /*this makes de image in src fit to the size of specified below*/
+  width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 200px !important;
+}
+
+
+.mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+  background-color: var(--main-color-red) !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+}
+
+mat-card-title{
+  font-size: 24px !important;
+  font-variant: all-small-caps;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+mat-card-header{
+  justify-content: center !important;
+}
+.mat-horizontal-stepper-content {
+  /* overflow: hidden; */
+  padding: 10px !important;
+}
+
+
+.mat-step-header .mat-step-icon {
+  background-color: #9ad8ed !important;
+  color: rgba(255,255,255,.87) !important;
+}
+.container{
+  padding: 0 !important;
+}
+
+
+.mat-list, .mat-nav-list, .mat-selection-list {
+  padding-top: 0 !important;
+  /* padding-bottom: 8px; */
+  display: block;
+}
+
+.prezzo{
+  position: absolute;
+  bottom: 15px;
+  margin-left: 15px;
+}
+
+.mat-tab-group.mat-primary .mat-tab-label:focus,
+.mat-tab-group.mat-primary .mat-tab-link:focus,
+.mat-tab-nav-bar.mat-primary .mat-tab-label:focus,
+.mat-tab-nav-bar.mat-primary .mat-tab-link:focus {
+  background-color: rgba(179, 60, 70, 0.3) !important;
+}
+
+button.mat-primary {
+  background-color: var(--main-color-red) !important;
+}
+
+
+.mat-tab-header {
+  display: flex;
+  overflow: hidden;
+  position: fixed !important;
+  flex-shrink: 0;
+  z-index: 100 !important;
+  background: white !important;
+  width: 100% !important;
+  margin-top: 80px !important;
+}
+
+
+.mat-tab-body-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  transition: height .5s cubic-bezier(.35,0,.25,1);
+  margin-top: 140px !important;
+
+}
+
+.vassoio-empty {
+  padding-bottom: 0;
+}
+
+.vassoio-no-empty {
+  padding-bottom: 60px !important;
+}
+
+.mat-tab-labels{
+  justify-content: center !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: var(--main-color-red) !important;
+  color: white !important;
+}
+
+.cdk-keyboard-focused.mat-calendar-body-active >.mat-calendar-body-cell-content:not(.mat-calendar-body-selected),
+.cdk-program-focused.mat-calendar-body-active>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected),
+:not(.mat-calendar-body-disabled):hover>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected){
+  background-color: var(--main-color-blue) !important;
+}
+
+.ng-star-inserted.active,
+.time-picker-clock-arrow,
+.time-picker-clock-origin,.time-picker-clock-arrow>span {
+  background: var(--main-color-red) !important;
+  color: white;
+}
+
+.mat-focused.mat-form-field-label{
+  color: var(--main-color-blue) !important;
+}
+
+/* Hamburger Animation */

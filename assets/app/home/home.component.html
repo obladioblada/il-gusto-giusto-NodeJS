@@ -1,0 +1,20 @@
+<div class="content">
+  <div class="grid" id="imagesGrid">
+  <figure  class="home-img" [style.opacity]="showFirstimg? '1':'0'">
+      <img src="http://via.placeholder.com/480x360">
+  </figure>
+    <figure class="home-img" [style.opacity]="showSecondtimg? '1':'0'">
+      <img src="http://via.placeholder.com/480x360">
+    </figure>
+  </div>
+</div>
+<footer class="footer" [ngClass]="closeFooter ? ' closed' : 'open' ">
+  <div style="background-color: #9ad9ed;
+    text-align: center;
+    height: 100%;">
+    <i class="material-icons" (click)="onSkipIntro()"
+       style="font-size: 40px; color: white;
+       cursor: pointer;
+       margin-top: 10px;">close</i>
+  </div>
+</footer>

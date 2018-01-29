@@ -1,0 +1,127 @@
+<div style="padding-top: 80px !important; height: 100%">
+  <mat-horizontal-stepper [linear]="true" style="height: 100% !important;">
+    <mat-step>
+      <ng-template matStepLabel>VASSOIO</ng-template>
+      <mat-card>
+        <mat-card-content>
+          <div *ngIf="vassoio.length>0; else noItems ">
+            <div style="min-height: 350px;" >
+              <mat-list>
+                <h3 mat-subheader *ngIf="panini.length>0">PANINI</h3>
+                <mat-list-item *ngFor="let el of panini; let i = index;">
+                     <i class="material-icons change-quantity-button" style="cursor: pointer" (click)="onDeleteItem(panini[i])">remove</i>
+                     <mat-card class="vassoio-quantity">{{el.quantita}}</mat-card>
+                    <i class="material-icons change-quantity-button" style="cursor: pointer" (click)="onAddItem(panini[i])">add</i>
+                    <h4 mat-line>{{el.elemento.name | uppercase}}</h4>
+                    <p mat-line> {{el.elemento.descrizione}} </p>
+                </mat-list-item>
+                <mat-divider *ngIf="panini.length>0"></mat-divider>
+                <h3 mat-subheader *ngIf="gastronomia.length>0">GASTRONOMIA</h3>
+                <mat-list-item *ngFor="let el of gastronomia; let i = index;">
+                  <i class="material-icons change-quantity-button" style="cursor: pointer" (click)="onDeleteItem(gastronomia[i])">remove</i>
+                  <mat-card class="vassoio-quantity">{{el.quantita}}</mat-card>
+                  <i class="material-icons change-quantity-button" style="cursor: pointer" (click)="onAddItem(gastronomia[i])">add</i>
+                  <h4 mat-line>{{el.elemento.name | uppercase}}</h4>
+                  <p mat-line> {{el.elemento.descrizione}}</p>
+                </mat-list-item>
+                <mat-divider *ngIf="gastronomia.length>0"></mat-divider>
+                <h3 mat-subheader *ngIf="bevande.length>0">BEVANDE</h3>
+                <mat-list-item *ngFor="let el of bevande; let i = index;">
+                  <i class="material-icons change-quantity-button" style="cursor: pointer" (click)="onDeleteItem(bevande[i])">remove</i>
+                  <mat-card class="vassoio-quantity">{{el.quantita}}</mat-card>
+                  <i class="material-icons change-quantity-button" style="cursor: pointer" (click)="onAddItem(bevande[i])">add</i>
+                  <h4 mat-line>{{el.elemento.name | uppercase}}</h4>
+                  <p mat-line> {{el.elemento.descrizione }} </p>
+                </mat-list-item>
+              </mat-list>
+            </div>
+            <div class="totale">
+              TOTALE :  <span style="padding-left: 10px">{{totale | currency:'EUR':'symbol' }}</span>
+            </div>
+            <div class="row" style="margin-top: 10px; text-align: center">
+              <button mat-button (click)="onResetVassoio()">RESET</button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="row" style="margin-top: 10px">
+              <button mat-button routerLink="/prenota" style="float: left; margin-left: 16px;">INDIETRO</button>
+              <button mat-button matStepperNext style="float: right; margin-right: 16px;">AVANTI</button>
+            </div>
+          </div>
+          <ng-template #noItems>
+            <div style="text-align: center" >
+              <h4> NON CI SONO ARTICOLI NEL CARRELLO</h4>
+            </div>
+           <div class="row" style="margin-top: 10px">
+             <button mat-button routerLink="/prenota" style="float: left">INDIETRO</button>
+           </div>
+          </ng-template>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>DATI</ng-template>
+          <mat-card style="max-width: 400px; margin: auto">
+          <mat-card-content style="text-align: center">
+            <div style="text-align: center">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field hideRequiredMarker="true">
+                    <input matInput placeholder="NOME" formControlName="secondCtrl" required>
+                  </mat-form-field>
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field hideRequiredMarker="true">
+                      <input matInput placeholder="COGNOME" formControlName="secondCtrl" required>
+                    </mat-form-field>
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col-md-12" >
+                  <mat-form-field hideRequiredMarker="true">
+                    <input matInput placeholder="EMAIL" formControlName="secondCtrl" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field hideRequiredMarker="true">
+                    <input matInput placeholder="TELEFONO" formControlName="secondCtrl" required>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width" hideRequiredMarker="true">
+                    <input matInput  (click)="picker.open()" [matDatepicker]="picker" placeholder="DATA" required>
+                    <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <input  class="time-input" atp-time-picker  #hourspicker>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+              <button mat-button matStepperPrevious style="float: left; margin-left: 16px;">INDIETRO</button>
+              <button mat-button matStepperNext style="float: right; margin-right: 16px;">AVANTI</button>
+            </div>
+          </mat-card-content>
+         </mat-card>
+       </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>INVIA</ng-template>
+      <div class="button-row" style="text-align: center">
+        <h3>Sei sicuro di volere inviare la prenotazione ? </h3>
+        <button mat-button matStepperPrevious>INDIETRO</button>
+        <button mat-raised-button color="primary" (click)="onSendBooking()">INVIA</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+

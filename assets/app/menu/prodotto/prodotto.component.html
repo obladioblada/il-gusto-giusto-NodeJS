@@ -1,0 +1,17 @@
+<mat-card class="food-card">
+  <mat-card-header>
+    <mat-card-title>{{prodotto.name}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="{{prodotto.imagePath}}" alt="{{prodotto.name}}">
+  <mat-card-content>
+    {{prodotto.descrizione}}
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-fab><i class="material-icons plus-one-icon" (click)="onAddElement()">add</i></button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <h4 class="prezzo"> {{prodotto.prezzo | currency:'EUR':'symbol'}}
+    </h4>
+  </mat-card-footer>
+</mat-card>
+

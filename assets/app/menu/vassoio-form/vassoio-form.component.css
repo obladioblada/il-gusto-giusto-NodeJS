@@ -1,0 +1,82 @@
+@media only screen and (min-width: 768px) {
+  .vassoio-card {
+    width: 500px;
+    margin: auto;
+    height: 100%;
+  }
+}
+
+
+.time-input{
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  /* width: 100%; */
+  font-size: 1rem;
+  margin: 0 0 20px 0;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.totale{
+  text-align: center;
+  color: white;
+  background-color: #b33c46;
+  width: 100%;
+  padding: 4px;
+  border-radius: 2px;
+}
+
+
+.vassoio-quantity{
+  float: right !important;
+  margin: 10px !important;
+  cursor: auto !important;
+  box-shadow: none !important;
+  color: #9e9e9e;
+  padding: 15px !important;
+}
+
+.vassoio-quantity:hover{
+  box-shadow: none;
+}
+
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 220px !important;
+}
+
+.time-input[_ngcontent-c3] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+  padding: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: all 0.3s;
+  width: 220px !important;
+}
+
+
+.change-quantity-button{
+  background: #9ad9ed;
+  cursor: pointer;
+  color: white;
+  border-radius: 50%;
+}

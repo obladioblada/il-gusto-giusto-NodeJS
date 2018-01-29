@@ -1,0 +1,16 @@
+<nav class="navbar navbar-light" [ngClass]=" isHome? 'background-home' : 'background-default' ">
+  <a class="navbar-brand" href="#">
+    <app-intro></app-intro>
+  </a>
+  <div class="hamburger-container" (click)="toggleDropDownMenu()" [ngClass]="showDrowDown? 'change' : ''">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </div>
+</nav>
+<div class="app-dropdown" [ngClass]="showDrowDown? 'open' : 'closed'">
+  <ul class="list-group" >
+    <li class="list-group-item" *ngFor="let url of urls"> <a (click)="onChangePage(url.url)"> {{url.name}} </a></li>
+  </ul>
+</div>
+

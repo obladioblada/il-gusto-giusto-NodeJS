@@ -1,0 +1,192 @@
+ul{
+  margin: auto;
+}
+
+nav{
+  margin: 0;
+}
+a{
+  text-decoration: none !important;
+}
+
+a:hover{
+  color:#b33c46 !important;;
+}
+
+.navbar{
+  position: fixed;
+  max-height: 80px;
+  min-height: 80px;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  z-index: 10000000;
+}
+
+
+.navbar-header {
+  float: left;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+}
+.navbar-brand {float:none;}
+
+.background-home{
+  background-color: #9ad8ed;
+  animation-name: changeNavBg;
+  animation-duration: 3s;
+  animation-delay: 6s;
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+  -moz-animation-fill-mode:forwards; /*FF 5+*/
+  -o-animation-fill-mode:forwards; /*Not implemented yet*/
+  animation-fill-mode:forwards; /*when the spec is finished*/
+}
+
+.background-default{
+  background-color: white;
+}
+
+
+/* The animation code */
+@keyframes changeNavBg {
+  from {background-color: #9ad8ed;}
+  to {background-color: white;}
+}
+
+.toggleButton {
+  margin: 25px;
+  font-size: 40px;
+  float: right;
+  cursor: pointer;
+  color: #9ad8ed;
+  /*animation-name: changeToogleColor;
+  animation-duration: 4s;
+  animation-delay: 5s;
+  -webkit-animation-fill-mode:forwards; !*Chrome 16+, Safari 4+*!
+  -moz-animation-fill-mode:forwards; !*FF 5+*!
+  -o-animation-fill-mode:forwards; !*Not implemented yet*!
+  animation-fill-mode:forwards; !*when the spec is finished*!
+*/
+}
+
+/* The animation code */
+@keyframes changeToogleColor {
+  from {color: white;}
+  to {color: #9ad8ed;}
+}
+
+
+.app-dropdown{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transition: all 0.5s;
+  z-index: 1000;
+}
+
+.app-dropdown.open{
+
+
+  visibility: visible;
+  opacity: 100;
+
+}
+
+.app-dropdown.closed{
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+}
+
+.list-group{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-200px,-200px);
+  width: 400px;
+}
+.list-group-item{
+  border: none;
+  text-align: center !important;
+  margin: 50px;
+}
+
+a{
+  text-decoration: none;
+  font-size: large;
+  transition: all 1s;
+  color: #9ad8ed;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+a:hover{
+  font-size: 2.2em;
+
+}
+
+
+
+/* hamburger css */
+
+
+.hamburger-container {
+  display: inline-block;
+  cursor: pointer;
+  margin: 20px;
+  font-size: 40px;
+  float: right;
+  color: #9ad8ed;
+  position: absolute;
+  right: 0;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #9ad8ed;
+  margin: 6px 0;
+  transition: 0.4s;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+
+
+/* Rotate first bar */
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-8px, 12px);
+  transform: rotate(-405deg) translate(-8px, 12px);
+
+}
+
+
+/* Fade out the second bar */
+.change .bar2 {
+  -webkit-transform: rotate(45deg) translate(4px, 0px) ;
+  transform: rotate(45deg) translate(4px, 0px) ;
+}
+
+/* Rotate last bar */
+.change .bar3 {
+  height: 90vh;
+  width: 5px;
+  transform: translate(18px, 18px);
+}
+
+
+.no-scroll{
+  overflow: hidden !important;
+}
+
+.scroll{
+  overflow: auto;
+}
+
+
+
+
+
+
+

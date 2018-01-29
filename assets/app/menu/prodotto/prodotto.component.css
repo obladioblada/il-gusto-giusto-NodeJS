@@ -1,0 +1,11 @@
+@media only screen and (min-width: 768px) {
+  .food-card {
+    width: 250px;
+    display: table-cell;
+  }
+}
+
+
+.plus-one-icon{
+  color: white;
+}
