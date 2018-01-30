@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mangoose = require('mongoose');
 var appRoutes = require('./routes/app');
 
-const db_PATH='mongodb://localhost/db ';
+const db_PATH='mongodb://localhost:27017/db';
 
 var app = express();
 mangoose.connect(db_PATH);

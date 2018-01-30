@@ -11,11 +11,13 @@ import { FooterVassoioComponent } from './menu/footer-vassoio/footer-vassoio.com
 import { AppRoutingModule} from './app-routing.module';
 import { VassoioFormComponent } from './menu/vassoio-form/vassoio-form.component';
 import { ProdottoComponent } from './menu/prodotto/prodotto.component';
-import {VassoioService} from './services/vassoio.service';
-import {FoodService} from './services/food.service';
+import { VassoioService} from './services/vassoio.service';
+import { FoodService} from './services/food.service';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
-import {IntroService} from './services/intro.service';
-import {AmazingTimePickerModule} from 'amazing-time-picker';
+import { IntroService} from './services/intro.service';
+import { AmazingTimePickerModule} from 'amazing-time-picker';
+import { SignInComponent} from "./auth/sign-in/sign-in.component";
+import { SignUpComponent} from "./auth/sign-up/sign-up.component";
 
 
 
@@ -58,6 +60,8 @@ import 'hammerjs';
         VassoioFormComponent,
         ProdottoComponent,
         ConfirmationComponent,
+        SignInComponent,
+        SignUpComponent
     ],
     imports: [
         BrowserModule,

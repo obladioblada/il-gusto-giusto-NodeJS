@@ -1,0 +1,25 @@
+.login-button{
+    width: 100%;
+    color: white;
+    background-color: #b33c46;
+}
+
+.user-login-icon{
+    margin: auto;
+    padding: 10px;
+    border-radius: 55%;
+    background: #8080803d;
+    color: #9ad9ed;
+    font-size: 80px;
+}
+
+.card-center{
+    max-width: 400px;
+    margin: auto;
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transition: all 1s;
+}

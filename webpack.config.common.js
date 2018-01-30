@@ -17,6 +17,18 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [{ loader: 'raw-loader' }]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true
+                        }
+                    }
+                ]
             }
         ],
         exprContextCritical: false

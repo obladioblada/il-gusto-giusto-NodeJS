@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
     ];
   isHome: boolean;
   navbar: any;
+  showLogin = true;
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
@@ -31,8 +32,9 @@ export class HeaderComponent implements OnInit {
     this.navbar = this.elementRef.nativeElement.querySelector('svg');
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart ) {
+        console.log(e.url);
         this.isHome = e.url === '/';
-        // console.log('isHome' + this.isHome);
+        this.showLogin = e.url !=='/signIn' && e.url !=='/signUp';
       }
     });
     if (!this.isHome) {
@@ -48,7 +50,7 @@ export class HeaderComponent implements OnInit {
 
   onChangePage(url: string) {
     this.showDrowDown = false;
-    this.router.navigate(['/' + url]);
+    this.router.navigate(['/', url]);
 
   }
 
