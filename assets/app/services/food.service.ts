@@ -1,8 +1,17 @@
 import {Prodotto} from '../menu/model/prodotto.model';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Injectable} from "@angular/core";
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable()
 export class FoodService {
 
-     p: Prodotto = new Prodotto(
+  constructor( private http: HttpClient){}
+
+  p: Prodotto = new Prodotto(
        'hamburger Pollo',
        'hamburger di Pollo',
        3,
@@ -56,4 +65,9 @@ export class FoodService {
   getProdottiGastronomia() {
     return this.gastronomia;
   }
+
+  getRESTProducts() {
+      return this.http.get('/products');
+  }
+
 }

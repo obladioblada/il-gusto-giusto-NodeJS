@@ -26,6 +26,8 @@ export class MenuComponent implements OnInit {
     this.panini = this.foodService.getPanini();
     this.gastronomia = this.foodService.getProdottiGastronomia();
     this.bevande = this.foodService.getBevande();
+    this.getProdutcs();
+    // getting bevande from backendd
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart ) {
        if (e.url === '/prenota/vassoio') {
@@ -38,6 +40,14 @@ export class MenuComponent implements OnInit {
       (event) => {
         this.trayEmpty = false;
       }
+    );
+  }
+
+  getProdutcs(){
+    this.foodService.getRESTProducts().subscribe(
+        data => console.log(data),
+        err => console.log(err),
+        () =>console.log('products loaded')
     );
   }
 

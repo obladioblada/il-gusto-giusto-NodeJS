@@ -18,13 +18,14 @@ import { IntroService} from './services/intro.service';
 import { AmazingTimePickerModule} from 'amazing-time-picker';
 import { SignInComponent} from "./auth/sign-in/sign-in.component";
 import { SignUpComponent} from "./auth/sign-up/sign-up.component";
-
+import {HttpClientModule} from "@angular/common/http";
 
 
 // material imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule,  } from '@angular/forms';
+import { ReactiveFormsModule,  } from '@angular/forms';
+
 
 import {
     MatButtonModule,
@@ -44,6 +45,9 @@ import {
     MatSelectModule,
 } from '@angular/material';
 import 'hammerjs';
+import {AuthService} from "./services/auth.service";
+import {AuthGuardService} from "./services/auth-guard.service";
+
 
 
 @NgModule({
@@ -78,13 +82,13 @@ import 'hammerjs';
         MatListModule,
         AppRoutingModule,
         MatStepperModule,
-        FormsModule,
         ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatSelectModule,
         MatRadioModule,
-        AmazingTimePickerModule
+        AmazingTimePickerModule,
+        HttpClientModule
     ],
     exports: [
         MatButtonModule,
@@ -102,7 +106,7 @@ import 'hammerjs';
         MatRadioModule,
         IntroComponent
     ],
-    providers: [FoodService, VassoioService, IntroService],
+    providers: [FoodService, VassoioService, IntroService, AuthService, AuthGuardService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

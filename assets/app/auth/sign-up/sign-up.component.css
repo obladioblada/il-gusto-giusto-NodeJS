@@ -8,17 +8,24 @@
     margin: auto;
     padding: 10px;
     border-radius: 55%;
-    background: #8080803d;
+    background-color: #8080803d;
     color: #9ad9ed;
     font-size: 80px;
 }
 
 .card-center{
-    max-width: 400px;
+    max-width: 600px;
+    min-width: 400px;
     margin: auto;
     position: absolute;
-    width: 400px;
+    width: 600px;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    transition: all 1s;
+    display: block;
+}
+
+.signUpInput{
+    width: 80% !important;
 }

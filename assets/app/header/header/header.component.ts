@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {Event, NavigationStart, Router} from '@angular/router';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
-              private router: Router) {  }
+              private router: Router,
+              private authService:AuthService) {  }
 
   ngOnInit() {
     this.showDrowDown = false;
@@ -53,5 +55,15 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/', url]);
 
   }
+
+  onLogOut(){
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+  isLoggedIn(){
+   return this.authService.isLoggedIn()
+  }
+
 
 }
