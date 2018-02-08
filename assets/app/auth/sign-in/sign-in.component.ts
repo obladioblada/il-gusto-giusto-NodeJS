@@ -45,8 +45,8 @@ export class SignInComponent implements OnInit {
     }
 
 
-  onSubmit(){
-        const email = this.signInFormGroup.value.email;
+    onSubmit(){
+         const email = this.signInFormGroup.value.email;
         const password = this.signInFormGroup.value.password;
         const user = new User(email, password);
         this.authService.signIn(user)
@@ -60,8 +60,16 @@ export class SignInComponent implements OnInit {
                 error => console.log(error)
 
             );
+    }
 
-  }
+    signInWithfacebook(){
+        console.log('signInface');
+        this.authService.signinwithfacebook()
+            .subscribe(
+                data => { console.log(data);},
+                error2 => {console.log(error2);}
+            );
+    }
 
 
 }

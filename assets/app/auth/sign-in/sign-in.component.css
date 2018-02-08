@@ -14,18 +14,34 @@
 }
 
 .card-center{
-    max-width: 600px;
-    min-width: 400px;
+    min-width: 300px;
     margin: auto;
     position: absolute;
-    width: 600px;
+    width: 100%;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    transition: all 1s;
 }
 
 .signInInput{
     width: 80% !important;
 }
 
+.footer-social-login{
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-card{
+    margin: 1px;
+    max-width: 400px;
+    float: none;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+.icon-social-login{
+    margin: 30px;
+    cursor: pointer;
+}
