@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {User} from "../user.model";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -15,13 +15,24 @@ export class SignInComponent implements OnInit {
     isLinear = true;
     signInFormGroup: FormGroup;
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
    ngOnInit() {
     this.signInFormGroup = new FormGroup({
         'email': new FormControl (null, [ Validators.required, Validators.email ], [ this.emailValidator.bind(this)] ),
         'password': new FormControl(null, [Validators.required, Validators.minLength(5)]),
       });
+
+    this.route.queryParams.subscribe(
+        (queryParams: Params) =>{
+            if(queryParams['SocialLogin']) {
+                this.authService.fetchSocialDataLogin().subscribe(
+                    data => this.setToken(data),
+                    err => console.log(err)
+                );
+            }
+        }
+    );
    }
 
    // check if email exist in db
@@ -46,29 +57,23 @@ export class SignInComponent implements OnInit {
 
 
     onSubmit(){
-         const email = this.signInFormGroup.value.email;
+        const email = this.signInFormGroup.value.email;
         const password = this.signInFormGroup.value.password;
         const user = new User(email, password);
         this.authService.signIn(user)
             .subscribe(
-                data => {
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('userId', data.userId);
-                    console.log('utente loggato');
-                    this.router.navigate(['/prenota']);
-                },
+                data => this.setToken(data),
                 error => console.log(error)
-
             );
     }
 
-    signInWithfacebook(){
-        console.log('signInface');
-        this.authService.signinwithfacebook()
-            .subscribe(
-                data => { console.log(data);},
-                error2 => {console.log(error2);}
-            );
+    setToken(data){
+        console.log(data.user);
+        this.authService.user = data.user;
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userId', data.user._id);
+        console.log('utente loggato');
+        this.router.navigate(['/prenota']);
     }
 
 

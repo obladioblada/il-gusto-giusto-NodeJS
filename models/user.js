@@ -6,12 +6,11 @@ var Schema = mongoose.Schema;
 var schema = new Schema({
 
     local:{
-        name        :{type: String , required: true},
-        surname     :{type: String , required: true},
-        password    :{type: String , required: true},
+        name        :String,
+        surname     :String,
+        password    :String,
         email       :{
             type        :String,
-            required    :true,
             unique      :true,
             lowercase   :true,
             trim        :true
@@ -21,13 +20,24 @@ var schema = new Schema({
             default     :false
         }
     },
-
     facebook:{
         id          :String,
         token       :String,
         name        :String,
         surname     :String,
         email       :String
+    },
+    twitter          : {
+        id           : String,
+        token        : String,
+        displayName  : String,
+        username     : String
+    },
+    google           : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
     }
 });
 

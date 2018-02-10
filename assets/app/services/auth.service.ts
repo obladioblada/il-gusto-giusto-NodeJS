@@ -3,11 +3,14 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
+import {getResponseURL} from "@angular/http/src/http_utils";
 
 
 
 @Injectable()
 export class AuthService {
+
+    user: any;
 
     constructor(private http: HttpClient){}
 
@@ -37,10 +40,12 @@ export class AuthService {
             .catch((error: Response) => Observable.throw(error));
     }
 
-    signinwithfacebook(){
-        console.log('service login facebook');
-        return this.http.get('http://localhost:3000/user/auth/facebook');
+    fetchSocialDataLogin(){
+        return this.http.post('http://localhost:3000/user/data','')
+            .map((response: Response) => response)
+            .catch((error: Response) => Observable.throw(error));
     }
+
 
     logout(){
         localStorage.clear();

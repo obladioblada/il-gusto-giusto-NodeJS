@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
     this.navbar = this.elementRef.nativeElement.querySelector('svg');
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart ) {
-        console.log(e.url);
         this.isHome = e.url === '/';
         this.showLogin = e.url !=='/signIn' && e.url !=='/signUp';
       }

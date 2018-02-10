@@ -1,5 +1,6 @@
-var LocalStrategy = require('passport-local');
-var FacebookStrategy = require('passport-facebook');
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 
 //load user model
 var User = require('./models/user');
@@ -8,7 +9,7 @@ var User = require('./models/user');
 var configAuth = require('./socialauthconfig');
 
 // expose this function to our app using module.exports
-module.exports = function(passport) {
+module.exports = function (passport) {
 
     // =========================================================================
     // passport session setup ==================================================
@@ -23,8 +24,8 @@ module.exports = function(passport) {
 
     // used to deserialize user
     passport.deserializeUser(function (id, done) {
-        User.findById(id, function (err,user) {
-            done(err,user);
+        User.findById(id, function (err, user) {
+            done(err, user);
         })
     });
 
@@ -35,40 +36,40 @@ module.exports = function(passport) {
     // by default, if there was no name, it would just be called 'local
 
     passport.use('local-signup', new LocalStrategy({
-        usernameField :'email',
-        passwordField :'password',
-        passReqToCallback :true
-    },
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true
+        },
         function (req, email, password, done) {
             process.nextTick(function () {
                 // find a user whose email is the same as the forms email
                 // we are checking to see if the user trying to login already exists
 
-                User.findOne({'local.email' : email}, function (err, user) {
+                User.findOne({'local.email': email}, function (err, user) {
                     // if there are any errors, return the error
 
-                    if(err){
+                    if (err) {
                         return done(err);
                     }
 
                     // check to see if theres already a user with that email
 
-                    if(user){
-                        return done(null,false,{'signUpMessage': 'the email is already taken'});
+                    if (user) {
+                        return done(null, false, {'signUpMessage': 'the email is already taken'});
                     }
                     else {
                         // let's create a new user
                         var newUser = new User();
-                        newUser.local ={
+                        newUser.local = {
                             name: req.body.name,
                             surname: req.body.surname,
-                            email:  email,
+                            email: email,
                             password: newUser.generateHash(password)
                         };
 
                         // save the user
                         newUser.save(function (err) {
-                            if(err){
+                            if (err) {
                                 throw err
                             }
                             return done(null, newUser);
@@ -76,7 +77,7 @@ module.exports = function(passport) {
                     }
                 })
             })
-    }));
+        }));
 
     // =========================================================================
     // LOCAL LOGIN =============================================================
@@ -85,34 +86,34 @@ module.exports = function(passport) {
     // by default, if there was no name, it would just be called 'local'
 
     passport.use('local-signin', new LocalStrategy({
-        usernameField:'email',
-        passwordField:'password',
-        passReqToCallback : true // allows us to pass back the entire request to the callback
-    },
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
+        },
         function (req, email, password, done) {
-        // callback with email and password from our form
+            // callback with email and password from our form
 
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
-        User.findOne({'local.email':req.body.email}, function (err, user) {
+            // find a user whose email is the same as the forms email
+            // we are checking to see if the user trying to login already exists
+            User.findOne({'local.email': req.body.email}, function (err, user) {
 
-            // if there are any errors, return the error before anything else
-            if(err)
-                return done(err);
-            // if no user is found, return the message
+                // if there are any errors, return the error before anything else
+                if (err)
+                    return done(err);
+                // if no user is found, return the message
 
-            if(!user)
-                return done(null,false, { message: 'Incorrect email.' });
-            // if the user is found but the password is wrong
-            if(!user.validPassword(password))
-                return done(null, false, {message: 'incorrect password'});
+                if (!user)
+                    return done(null, false, {message: 'Incorrect email.'});
+                // if the user is found but the password is wrong
+                if (!user.validPassword(password))
+                    return done(null, false, {message: 'incorrect password'});
 
-            // all is well, return successful user
-            return done(null, user);
-        });
+                // all is well, return successful user
+                return done(null, user);
+            });
 
 
-    }));
+        }));
 
 
     // =========================================================================
@@ -120,15 +121,17 @@ module.exports = function(passport) {
     // =========================================================================
 
     passport.use(new FacebookStrategy({
-        clientID :configAuth.facebookAuth.clientID,
-        clientSecret:configAuth.facebookAuth.clientSecret,
-        callbackURL:configAuth.facebookAuth.callbackURL
-    },
+            clientID: configAuth.facebookAuth.clientID,
+            clientSecret: configAuth.facebookAuth.clientSecret,
+            callbackURL: configAuth.facebookAuth.callbackURL,
+            profileFields: configAuth.facebookAuth.profileFields
+        },
         // facebook will send back the token and profile
-        function(accessToken,refreshToken,profile,done) {
+        function (accessToken, refreshToken, profile, done) {
 
+            console.log(profile);
             // asynchronous
-            process.nextTick(function() {
+            process.nextTick(function () {
                 // find the user in the database based on their facebook id
                 User.findOne({'facebook.id': profile.id}, function (err, user) {
 
@@ -149,10 +152,15 @@ module.exports = function(passport) {
                         newUser.facebook.token = accessToken;
                         newUser.facebook.name = profile.name.givenName;
                         newUser.facebook.surname = profile.name.familyName;
-                        newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                        var email = profile.email || profile.emails[0].value;
+                        if (!email) {
+                            console.log('this user has no email in his fb');
+                            return done({message: 'this user has no email in his fb'});
+                        }
+                        newUser.facebook.email = email; // facebook can return multiple emails so we'll take the first
 
                         // save our user to the database
-                        newUser.save(function(err) {
+                        newUser.save(function (err) {
                             if (err)
                                 throw err;
 
@@ -163,5 +171,27 @@ module.exports = function(passport) {
                 });
 
             });
-    }));
+        }));
+
+
+    // =========================================================================
+    // TWITTER =================================================================
+    // =========================================================================
+
+    passport.use(new TwitterStrategy({
+            consumerKey: configAuth.twitterAuth.consumerKey,
+            consumerSecret: configAuth.twitterAuth.consumerSecret,
+            callbackURL: configAuth.twitterAuth.callbackURL
+        }, function (token, tokenSecret, profile, done) {
+
+            // make the code asynchronous
+            // User.findOne won't fire until we have all our data back from Twitter
+            process.nextTick(function () {
+
+                // TO BE CONTINUED......
+
+
+            });
+        }
+    ));
 };

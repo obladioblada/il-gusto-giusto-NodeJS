@@ -10,6 +10,16 @@ var app = express();
 var passport = require('passport');
 var flash = require('connect-flash');
 
+
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
+
 // setting end points routes
 var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
@@ -20,8 +30,8 @@ const db_PATH='mongodb://localhost:27017/db';
 mangoose.connect(db_PATH);
 
 
-require('./passportconfig')(passport); // pass passport for configuration
 
+require('./passportconfig')(passport); // pass passport for configuration
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,12 +58,7 @@ app.use(passport.initialize());
 //app.use(passport.session());
 app.use(flash());
 
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
-  next();
-});
+
 
 app.use('/', appRoutes);
 app.use('/user', userRoutes);
