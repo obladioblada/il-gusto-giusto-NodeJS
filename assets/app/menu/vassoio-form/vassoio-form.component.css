@@ -50,33 +50,18 @@
 }
 
 
-.mat-form-field {
-  display: inline-block;
-  position: relative;
-  text-align: left;
-  width: 220px !important;
-}
-
-.time-input[_ngcontent-c3] {
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #9e9e9e;
-  border-radius: 0;
-  outline: none;
-  height: 3rem;
-  font-size: 14px;
-  margin: 0 0 20px 0;
-  padding: 0;
-  box-shadow: none;
-  box-sizing: content-box;
-  transition: all 0.3s;
-  width: 220px !important;
-}
-
-
 .change-quantity-button{
   background: #9ad9ed;
   cursor: pointer;
   color: white;
   border-radius: 50%;
+}
+
+.auth-card{
+  margin: 1px;
+  max-width: 400px;
+  float: none;
+  left: 50%;
+  transform: translate(-50%,0);
+  margin-top: 30px;
 }

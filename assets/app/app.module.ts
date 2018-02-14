@@ -15,10 +15,10 @@ import { VassoioService} from './services/vassoio.service';
 import { FoodService} from './services/food.service';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { IntroService} from './services/intro.service';
-import { AmazingTimePickerModule} from 'amazing-time-picker';
 import { SignInComponent} from "./auth/sign-in/sign-in.component";
 import { SignUpComponent} from "./auth/sign-up/sign-up.component";
 import {HttpClientModule} from "@angular/common/http";
+
 
 
 // material imports
@@ -43,6 +43,7 @@ import {
     MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
+    MatCheckboxModule,
 } from '@angular/material';
 import 'hammerjs';
 import {AuthService} from "./services/auth.service";
@@ -87,8 +88,8 @@ import {AuthGuardService} from "./services/auth-guard.service";
         MatNativeDateModule,
         MatSelectModule,
         MatRadioModule,
-        AmazingTimePickerModule,
-        HttpClientModule
+        HttpClientModule,
+        MatCheckboxModule
     ],
     exports: [
         MatButtonModule,
@@ -104,9 +105,16 @@ import {AuthGuardService} from "./services/auth-guard.service";
         MatStepperModule,
         MatDatepickerModule,
         MatRadioModule,
+        MatCheckboxModule,
         IntroComponent
     ],
-    providers: [FoodService, VassoioService, IntroService, AuthService, AuthGuardService],
+    providers: [
+        FoodService,
+        VassoioService,
+        IntroService,
+        AuthService,
+        AuthGuardService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

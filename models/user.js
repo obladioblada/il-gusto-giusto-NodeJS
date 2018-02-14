@@ -5,39 +5,31 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema({
 
-    local:{
+    local           : {
         name        :String,
         surname     :String,
         password    :String,
-        email       :{
-            type        :String,
-            unique      :true,
-            lowercase   :true,
-            trim        :true
-        },
-        isVerified  :{
-            type        :Boolean,
-            default     :false
-        }
+        email       :String,
     },
-    facebook:{
+    facebook        : {
         id          :String,
         token       :String,
         name        :String,
         surname     :String,
         email       :String
     },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String
+    twitter         : {
+        id          : String,
+        token       : String,
+        displayName : String,
+        name        : String,
+        email       : String
     },
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
+    google          : {
+        id          : String,
+        token       : String,
+        email       : String,
+        name        : String,
     }
 });
 

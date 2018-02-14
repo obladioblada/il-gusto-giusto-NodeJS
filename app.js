@@ -1,14 +1,15 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var mangoose = require('mongoose');
-var app = express();
-var passport = require('passport');
-var flash = require('connect-flash');
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+
+let bodyParser = require('body-parser');
+let mangoose = require('mongoose');
+let session = require('express-session');
+let app = express();
+let passport = require('passport');
+let flash = require('connect-flash');
 
 
 app.use(function(req, res, next) {
@@ -21,9 +22,10 @@ app.use(function(req, res, next) {
 
 
 // setting end points routes
-var appRoutes = require('./routes/app');
-var userRoutes = require('./routes/user');
-var commerceRoutes = require('./routes/commerce');
+let appRoutes = require('./routes/app');
+let userRoutes = require('./routes/user');
+let commerceRoutes = require('./routes/commerce');
+let braintreRoutes = require('./routes/braintree');
 
 // connecting database
 const db_PATH='mongodb://localhost:27017/db';
@@ -48,14 +50,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // passport configuration
-/*app.use(session({
+app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
-}));*/
+}));
 app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.session());
 app.use(flash());
 
 
@@ -63,6 +64,7 @@ app.use(flash());
 app.use('/', appRoutes);
 app.use('/user', userRoutes);
 app.use('/products', commerceRoutes);
+app.use('/braintree', braintreRoutes);
 
 
 // catch 404 and forward to error handler (angular)

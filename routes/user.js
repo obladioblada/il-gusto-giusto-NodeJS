@@ -1,15 +1,11 @@
+let express = require('express');
+let router = express.Router();
+let jwt = require('jsonwebtoken');
+let passport = require('passport');
+let User = require('../models/user');
+let querystring = require('querystring');
 
-
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
-var passport = require('passport');
-var User = require('../models/user');
-const querystring = require('querystring');
-
-
-var user;
+let user;
 
 
 //signUp post 
@@ -45,17 +41,14 @@ router.get('/auth/facebook', passport.authenticate('facebook', {
     scope : ['email','public_profile']
 }));
 
-// =====================================
-// DA RIVEDERE PER FACEBOOOK LOGIN =======================================================
-// =====================================
 // handle the callback after facebook has authenticated the user
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook'),
-    function (req, res) {
+router.get('/auth/facebook/callback', passport.authenticate('facebook'), function (req, res) {
         let token = jwt.sign({user: req.user}, 'secret', { expiresIn: 7200 });
-        user = { message:'socessfully logged in with facebook',
+        user =
+            { message:'socessfully logged in with facebook',
                 token: token,
-                user: req.user};
+                user: req.user
+            };
         const query = querystring.stringify({
             "SocialLogin": true,
         });
@@ -63,10 +56,11 @@ router.get('/auth/facebook/callback',
     });
 
 
+
+// send user data to client when a social login occured
 router.post('/data', function(req, res) {
     res.status(201).json(user);
 });
-// DA RIVEDERE PER FACEBOOOK LOGIN =======================================================
 
 
 // route for logging out
@@ -87,8 +81,62 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
+// =====================================
+// TWITTER ROUTES ======================
+// =====================================
 
 
+// Redirect the user to Twitter for authentication.  When complete, Twitter
+// will redirect the user back to the application at
+//   /auth/twitter/callback
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+
+// Twitter will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+router.get('/auth/twitter/callback', passport.authenticate('twitter'), function (req, res) {
+        let token = jwt.sign({user: req.user}, 'secret', { expiresIn: 7200 });
+        user = {
+            message:'socessfully logged in with facebook',
+            token: token,
+            user: req.user
+        };
+        const query = querystring.stringify({
+            "SocialLogin": true,
+        });
+        res.redirect('/signIn?'+query);
+    });
+
+
+
+
+// =====================================
+// GOOGLE ROUTES =======================
+// =====================================
+
+
+router.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+
+
+router.get('/auth/google/callback', passport.authenticate('google'), function (req, res) {
+    let token = jwt.sign({user: req.user}, 'secret', { expiresIn: 7200 });
+    user = {
+        message:'socessfully logged in with facebook',
+        token: token,
+        user: req.user
+    };
+    const query = querystring.stringify({
+        "SocialLogin": true,
+    });
+    res.redirect('/signIn?'+query);
+});
+
+
+
+//EMAIL CHECKING =====================================
 
 
 router.post('/checkemail', function (req, res,next) {

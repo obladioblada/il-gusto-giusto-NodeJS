@@ -1,6 +1,6 @@
 <div style="width: 100%">
     <form [formGroup]="signInFormGroup">
-            <mat-horizontal-stepper class="card-center">
+            <mat-horizontal-stepper class="card-center sign-in-stepper">
                 <mat-step>
                     <mat-card class="auth-card" >
                         <mat-card-header>
@@ -52,11 +52,14 @@
                             <a href="/user/auth/facebook">
                                 <i class="fab fa-3x fa-facebook icon-social-login" style="color: #3b5998" ></i>
                             </a>
-                            <i class="fab fa-3x  fa-google icon-social-login" style="color: #4885ed"></i>
-                            <i class="fab fa-3x  fa-twitter-square icon-social-login" style="color: #00aced"></i>
+                            <a href="/user/auth/google">
+                                <i class="fab fa-3x  fa-google icon-social-login" style="color: #4885ed"></i>
+                            </a>
+                            <a href="/user/auth/twitter">
+                                <i class="fab fa-3x  fa-twitter-square icon-social-login" style="color: #00aced"></i>
+                            </a>
                         </div>
                     </div>
-
                 </mat-step>
                 <mat-step>
                         <mat-card class="auth-card">

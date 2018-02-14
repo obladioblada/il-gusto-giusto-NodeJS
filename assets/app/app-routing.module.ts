@@ -12,7 +12,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
 
 
 const appRoutes: Routes = [
-    {path: '', component: HomeComponent, canActivate:[AuthGuardService]},
+    {path: '', component: HomeComponent},
     {path: 'prenota', canActivate:[AuthGuardService], component: MenuComponent},
     {path: 'vassoio',canActivate:[AuthGuardService], component: VassoioFormComponent},
     {path: 'chi',component: ChiSiamoContainerComponent},

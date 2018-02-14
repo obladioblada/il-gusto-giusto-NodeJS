@@ -1,11 +1,11 @@
-<div style="padding-top: 80px !important; height: 100%">
-  <mat-horizontal-stepper [linear]="true" style="height: 100% !important;">
+<div style="width: 100%">
+  <mat-horizontal-stepper [linear]="true" style="margin-top: 80px; height: 100%">
     <mat-step>
       <ng-template matStepLabel>VASSOIO</ng-template>
-      <mat-card>
+      <mat-card class="auth-card">
         <mat-card-content>
           <div *ngIf="vassoio.length>0; else noItems ">
-            <div style="min-height: 350px;" >
+            <div style="min-height: 300px;" >
               <mat-list>
                 <h3 mat-subheader *ngIf="panini.length>0">PANINI</h3>
                 <mat-list-item *ngFor="let el of panini; let i = index;">
@@ -58,30 +58,51 @@
         </mat-card-content>
       </mat-card>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
+    <mat-step [stepControl]="formGroup">
+      <form [formGroup]="formGroup">
         <ng-template matStepLabel>DATI</ng-template>
-          <mat-card style="max-width: 400px; margin: auto">
+          <mat-card class="auth-card">
           <mat-card-content style="text-align: center">
             <div style="text-align: center">
               <div class="row">
                 <div class="col-md-12">
                   <mat-form-field hideRequiredMarker="true">
-                    <input matInput placeholder="TELEFONO" formControlName="secondCtrl" required>
+                    <input matInput placeholder="TELEFONO" formControlName="tel" required>
                   </mat-form-field>
+                  <span *ngIf="!formGroup.get('tel').valid && formGroup.get('tel').touched"
+                        class="help-block">Inserisci una numero di telefono valido </span>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <mat-form-field class="example-full-width" hideRequiredMarker="true">
-                    <input matInput  (click)="picker.open()" [matDatepicker]="picker" placeholder="DATA" required>
+                    <input matInput  (click)="picker.open()"
+                           [min]="today"
+                           formControlName="date"
+                           [matDatepicker]="picker"
+                           placeholder="DATA"
+                           (dateChange)="addEvent('change', $event)"
+                           [matDatepickerFilter]="myMondayFilter"
+                           required>
                     <mat-datepicker touchUi="true" #picker></mat-datepicker>
                   </mat-form-field>
+                  <span *ngIf="!formGroup.get('date').valid && formGroup.get('date').touched"
+                        class="help-block">Inserisci una data valida</span>
                 </div>
-              </div>
-              <div class="row">
+                <div class="row">
                 <div class="col-md-12">
-                    <input  class="time-input" atp-time-picker  #hourspicker>
+                  <mat-form-field class="example-full-width" hideRequiredMarker="true">
+                    <mat-select placeholder="ORA" formControlName="hours" [(ngModel)]="selectedHour">
+                      <mat-optgroup *ngFor="let group of filteredhours" [label]="group.dayMoment">
+                        <mat-option *ngFor="let hour of group.hours" [value]="hour.value">
+                          {{ hour.viewValue }}
+                        </mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                  </mat-form-field>
+                  <span *ngIf="!formGroup.get('hours').valid && formGroup.get('hours').touched"
+                        class="help-block">Inserisci un orario valido</span>
+                </div>
                 </div>
               </div>
             </div>
@@ -94,11 +115,23 @@
        </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>INVIA</ng-template>
+      <ng-template matStepLabel>PAGA</ng-template>
       <div class="button-row" style="text-align: center">
-        <h3>Sei sicuro di volere inviare la prenotazione ? </h3>
-        <button mat-button matStepperPrevious>INDIETRO</button>
-        <button mat-raised-button color="primary" (click)="onSendBooking()">INVIA</button>
+        <mat-card class="auth-card">
+          <mat-card-content style="text-align: center">
+            <div style="text-align: center">
+              <div id="dropin-wrapper">
+                <div id="checkout-message"></div>
+                <div id="dropin-container"></div>
+                <button id="submit-button">Submit payment</button>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 10px">
+              <button mat-button matStepperPrevious style="float: left; margin-left: 16px;">INDIETRO</button>
+              <button mat-button matStepperNext style="float: right; margin-right: 16px;">AVANTI</button>
+            </div>
+          </mat-card-content>
+        </mat-card>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

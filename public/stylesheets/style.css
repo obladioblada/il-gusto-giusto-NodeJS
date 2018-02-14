@@ -185,10 +185,14 @@ button.mat-primary {
   color: var(--main-color-blue) !important;
 }
 
-
-.mat-horizontal-stepper-header-container{
+.sign-in-stepper > .mat-horizontal-stepper-header-container{
   display: none !important;
 }
+
+.mat-horizontal-content-container{
+  height: 100%
+}
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -200,7 +204,6 @@ input:-webkit-autofill:active {
 .mat-form-field-ripple {
   background-color: #9ad9ed !important;
 }
-
 .mat-focused, .mat-form-field-label{
   color: #9ad9ed !important;;
 }
@@ -208,4 +211,17 @@ input:-webkit-autofill:active {
 .mat-horizontal-content-container {
   overflow: hidden;
   padding: 0 !important;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: #b33c46 !important;
+}
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #b33c46 !important;
+}
+
+
+.mat-optgroup-label {
+  background: #9ad9ed !important;
+  color: white !important;
 }
