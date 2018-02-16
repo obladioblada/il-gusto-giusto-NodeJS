@@ -1,0 +1,7 @@
+<div *ngIf="showDropinUI && clientToken" braintreeDirective>
+    <div id="dropin-container"></div>
+    <button (click)="pay()" *ngIf="clientToken">{{buttonText}}</button>
+</div>
+<div *ngIf="clientTokenNotReceived" class="error">
+    Error! Client token not received.
+</div>`

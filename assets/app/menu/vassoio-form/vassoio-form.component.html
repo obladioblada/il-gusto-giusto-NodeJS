@@ -119,16 +119,16 @@
       <div class="button-row" style="text-align: center">
         <mat-card class="auth-card">
           <mat-card-content style="text-align: center">
-            <div style="text-align: center">
-              <div id="dropin-wrapper">
-                <div id="checkout-message"></div>
-                <div id="dropin-container"></div>
-                <button id="submit-button">Submit payment</button>
-              </div>
+            <div class="row">
+              <app-braintree
+                      [clientTokenURL]="'/braintree/getclienttoken'"
+                      [createPurchaseURL]="'/braintree/createpurchase'"
+                      (paymentStatus)="onPaymentStatus($event)"
+                      [buttonText]="'PAGA'">
+              </app-braintree>
             </div>
             <div class="row" style="margin-top: 10px">
               <button mat-button matStepperPrevious style="float: left; margin-left: 16px;">INDIETRO</button>
-              <button mat-button matStepperNext style="float: right; margin-right: 16px;">AVANTI</button>
             </div>
           </mat-card-content>
         </mat-card>

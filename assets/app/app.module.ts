@@ -18,7 +18,8 @@ import { IntroService} from './services/intro.service';
 import { SignInComponent} from "./auth/sign-in/sign-in.component";
 import { SignUpComponent} from "./auth/sign-up/sign-up.component";
 import {HttpClientModule} from "@angular/common/http";
-
+import {BraintreeComponent} from "./menu/vassoio-form/braintree.component";
+import {BraintreeService} from "./services/braintree.service";
 
 
 // material imports
@@ -48,8 +49,9 @@ import {
 import 'hammerjs';
 import {AuthService} from "./services/auth.service";
 import {AuthGuardService} from "./services/auth-guard.service";
-
-
+import {BraintreeDirective} from "./braintree.directive";
+import {VassoioGuardService} from "./services/vassoio-guard.service";
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
     declarations: [
@@ -57,6 +59,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
         HeaderComponent,
         IntroComponent,
         DrawAnimationDirective,
+        BraintreeDirective,
         ChiSiamoContainerComponent,
         MenuComponent,
         DoveSiamoContainerComponent,
@@ -66,7 +69,8 @@ import {AuthGuardService} from "./services/auth-guard.service";
         ProdottoComponent,
         ConfirmationComponent,
         SignInComponent,
-        SignUpComponent
+        SignUpComponent,
+        BraintreeComponent
     ],
     imports: [
         BrowserModule,
@@ -89,7 +93,10 @@ import {AuthGuardService} from "./services/auth-guard.service";
         MatSelectModule,
         MatRadioModule,
         HttpClientModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCjVfcCJ63Fwtco-q1CR32Bnp562xQWLAg'
+        })
     ],
     exports: [
         MatButtonModule,
@@ -113,7 +120,9 @@ import {AuthGuardService} from "./services/auth-guard.service";
         VassoioService,
         IntroService,
         AuthService,
-        AuthGuardService
+        AuthGuardService,
+        BraintreeService,
+        VassoioGuardService
     ],
     bootstrap: [AppComponent]
 })

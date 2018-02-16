@@ -1,9 +1,8 @@
 import {User} from "../auth/user.model";
-import {Injectable} from "@angular/core";
+import {EventEmitter, Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
-import {getResponseURL} from "@angular/http/src/http_utils";
 
 
 
@@ -11,6 +10,7 @@ import {getResponseURL} from "@angular/http/src/http_utils";
 export class AuthService {
 
     user: any;
+    usrEvent = new EventEmitter<any>();
 
     constructor(private http: HttpClient){}
 

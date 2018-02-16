@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {FoodService} from '../services/food.service';
 import {VassoioService} from '../services/vassoio.service';
-import {Event, NavigationStart, Router} from '@angular/router';
+import {CanDeactivate, Event, NavigationStart, Router} from '@angular/router';
 import {Prodotto} from './model/prodotto.model';
-
+import {SaveOnDeactivate} from "../services/vassoio-guard.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,7 @@ import {Prodotto} from './model/prodotto.model';
   styleUrls: ['./menu.component.css'],
   providers: []
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements SaveOnDeactivate{
 
   onVassoioURL: boolean;
   trayEmpty: boolean;
@@ -32,6 +33,7 @@ export class MenuComponent implements OnInit {
       if (e instanceof NavigationStart ) {
        if (e.url === '/prenota/vassoio') {
           this.onVassoioURL = true;
+          this.vassoioService.saveOnLocalStorage();
        }
       }
     });
@@ -41,7 +43,10 @@ export class MenuComponent implements OnInit {
         this.trayEmpty = false;
       }
     );
+    this.vassoioService.loadFromLocalStorage();
+
   }
+
 
   getProdutcs(){
     this.foodService.getRESTProducts().subscribe(
@@ -50,5 +55,17 @@ export class MenuComponent implements OnInit {
         () =>console.log('products loaded')
     );
   }
+
+    // save when leavaing app
+    @HostListener('window:beforeunload', ['$event'])
+    saveOnLocal() {
+        this.vassoioService.saveOnLocalStorage();
+    }
+
+    canDeactivate():Observable<boolean> | Promise<boolean> | boolean{
+      //this.vassoioService.saveOnLocalStorage();
+      return true;
+    };
+
 
 }

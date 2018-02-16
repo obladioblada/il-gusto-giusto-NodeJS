@@ -1,9 +1,10 @@
 import {Prodotto} from '../menu/model/prodotto.model';
 import {EventEmitter} from '@angular/core';
 
-export class VassoioService  {
 
-  // array generale con tutti i prodotto inseriti una sola volta
+export class VassoioService {
+
+    // array generale con tutti i prodotto inseriti una sola volta
   elements: any [] = [];
   totale = 0;
   // array contente il oggetti {prodotti e quantita} tipo e la quantità
@@ -13,6 +14,12 @@ export class VassoioService  {
 
    constructor() {
    }
+
+    ngOnInit(): void {
+    this.loadFromLocalStorage();
+    }
+
+
     onElementAdded(elem: Prodotto) {
      if (this.elements.indexOf(elem) > -1) {
        // elemente gia inserito, aggiorno la sua quanttà
@@ -70,5 +77,31 @@ export class VassoioService  {
     this.tryChanged.emit('addElement');
   }
 
+
+    saveOnLocalStorage(){
+        if(this.vassoio.length>0) {
+            localStorage.setItem('vassoio', JSON.stringify(this.vassoio));
+            localStorage.setItem('elements', JSON.stringify(this.elements));
+            localStorage.setItem('count_carrello_element', JSON.stringify(this.count_carrello_element));
+            localStorage.setItem('totale', JSON.stringify(this.totale));
+        }
+    }
+
+    loadFromLocalStorage(){
+        let vassoio= JSON.parse(localStorage.getItem('vassoio'));
+        let elements= JSON.parse(localStorage.getItem('elements'));
+        let count_carrello_element = localStorage.getItem('count_carrello_element');
+        let totale = localStorage.getItem('totale');
+        if(vassoio){
+            this.vassoio = vassoio;
+            this.elements = elements;
+            this.count_carrello_element =+count_carrello_element;
+            this.totale = +totale;
+
+        }
+        console.log("emit try changed");
+        this.tryChanged.emit('tryLoaded');
+        console.log(this.vassoio);
+    }
 }
 

@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class DoveSiamoContainerComponent implements OnInit {
 
   images: string[];
+    lat: number = 51.678418;
+    lng: number = 7.809007;
 
   constructor() { }
 

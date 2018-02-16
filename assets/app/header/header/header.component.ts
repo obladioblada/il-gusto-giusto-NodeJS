@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {Event, NavigationStart, Router} from '@angular/router';
 import {AuthService} from "../../services/auth.service";
+import {User} from "../../auth/user.model";
 
 @Component({
   selector: 'app-header',
@@ -23,11 +24,14 @@ export class HeaderComponent implements OnInit {
   isHome: boolean;
   navbar: any;
   showLogin = true;
+  user: any;
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
               private router: Router,
-              private authService:AuthService) {  }
+              private authService:AuthService) {
+      this.user  = { local: {name:''}};
+  }
 
   ngOnInit() {
     this.showDrowDown = false;
@@ -41,6 +45,11 @@ export class HeaderComponent implements OnInit {
     if (!this.isHome) {
       this.renderer.setStyle(this.navbar, 'background-color:', 'white');
       }
+
+      this.authService.usrEvent.subscribe((event: Event) =>{
+          console.log(event);
+          this.user = this.authService.user;
+      });
   }
 
 

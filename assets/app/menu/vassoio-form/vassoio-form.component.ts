@@ -223,15 +223,22 @@ export class VassoioFormComponent implements OnInit {
     this.vassoioService.resetVassoio();
     this.vassoio = this.vassoioService.vassoio;
     this.totale = this.vassoioService.totale;
+    //clear local storage
+      localStorage.removeItem('vassoio');
+      localStorage.removeItem('elements');
+      localStorage.removeItem('count_carrello_element');
+      localStorage.removeItem('totale');
   }
 
   onDeleteItem(prodotto) {
     // elimino prodotto dal vassoio
     this.vassoioService.onDeleteElement(prodotto);
+    this.vassoioService.saveOnLocalStorage();
   }
 
   onAddItem(prodotto) {
     this.vassoioService.onAddItem(prodotto);
+    this.vassoioService.saveOnLocalStorage();
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -256,7 +263,7 @@ export class VassoioFormComponent implements OnInit {
 
   filterHours(){
        //let currentHour = this.today.getHours();
-        let currentHour = 13;
+        let currentHour = 20;
         if(currentHour < this.APERTURA_MATTINA || currentHour > this.CHIUSURA_SERA) {
             console.log('no-opem');
             this.filteredhours = this.hoursInterface;
@@ -281,12 +288,13 @@ export class VassoioFormComponent implements OnInit {
 
 
    islater(value){
-     /*const currentHour = new Date().getHours();
+    /* const currentHour = new Date().getHours();
      const currentMinutes = new Date().getMinutes();*/
-     const currentHour = 13;
-     const currentMinutes = 20;
+       const currentHour = 20;
+       const currentMinutes = 45;
+
      const v = value.value.split(':');
-     if( v[0]>=currentHour && v[1]>=currentMinutes ) {
+     if( (v[0]>currentHour) || ( v[0]===currentHour && v[1]>=currentMinutes) ) {
          return value;
      }
   }

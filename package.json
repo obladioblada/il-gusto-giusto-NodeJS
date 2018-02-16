@@ -8,6 +8,7 @@
     "build:prod": "del-cli public/js/app && ngc -p tsconfig.aot.json && ngc -p tsconfig.aot.json && webpack --config webpack.config.prod.js --progress --profile --bail && del-cli 'assets/app/**/*.js' 'assets/app/**/*.ngsummary.json' 'assets/app/**/*.ngstyle.*'"
   },
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.2.2",
     "@angular/cdk": "^5.2.1",
     "@angular/common": "^5.0.0",
@@ -27,6 +28,7 @@
     "body-parser": "~1.15.2",
     "bootstrap": "^3.3.7",
     "braintree": "^2.6.0",
+    "braintree-web-drop-in": "^1.9.4",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "core-js": "^2.4.1",

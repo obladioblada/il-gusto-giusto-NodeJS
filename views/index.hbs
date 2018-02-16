@@ -11,16 +11,21 @@
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/deeppurple-amber.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/theme.scss" type="text/scss">
+    <link rel="stylesheet" href="/stylesheets/dropin.css" id="braintree-dropin-stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-    <script src="https://js.braintreegateway.com/web/dropin/1.9.4/js/dropin.min.js"></script>
     <!-- includes the Braintree JS client SDK -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <!-- includes jQuery -->
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-</head>
+
+    </head>
 <body>
-<my-app>Loading ...</my-app>
+<my-app>
+    <div class="material_block">
+        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="circle" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+    </div>
+</my-app>
 <script src="/js/app/bundle.js"></script>
 </body>
 </html>

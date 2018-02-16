@@ -68,10 +68,10 @@ export class SignInComponent implements OnInit {
     }
 
     setToken(data){
-        console.log(data.user);
         this.authService.user = data.user;
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.user._id);
+        this.authService.usrEvent.emit('utenteLoggato');
         console.log('utente loggato');
         this.router.navigate(['/prenota']);
     }

@@ -7,8 +7,13 @@
     <div class="bar2"></div>
     <div class="bar3"></div>
   </div>
-    <h4 class="login" (click)="onChangePage('signIn')" *ngIf="showLogin && !isLoggedIn()">LOGIN</h4>
-    <h4 class="login" (click)="onLogOut()" *ngIf="isLoggedIn()">LOGOUT</h4>
+    <div class="login" (click)="onChangePage('signIn')" *ngIf="showLogin && !isLoggedIn()">
+      <img src="../../../../public/login.png" class="login-logout-icon"><div class="login-logout-text">LOGIN</div>
+    </div>
+    <div class="login" (click)="onLogOut()" *ngIf="isLoggedIn()">
+      <img src="../../../../public/logout.png"  class="login-logout-icon"><div class="login-logout-text">LOGOUT</div>
+    </div>
+    <h4 class="login name" style="margin-right: 50px" *ngIf="isLoggedIn()">{{user.local.name}}</h4>
 </nav>
 <div class="app-dropdown" [ngClass]="showDrowDown? 'open' : 'closed'">
   <ul class="list-group" >
