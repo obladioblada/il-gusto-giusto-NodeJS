@@ -47,14 +47,12 @@ export class HeaderComponent implements OnInit {
       }
 
       this.authService.usrEvent.subscribe((event: Event) =>{
-          console.log(event);
           this.user = this.authService.user;
       });
   }
 
 
   toggleDropDownMenu() {
-     // console.log('togglwe DropDown');
      this.showDrowDown = !this.showDrowDown;
   }
 

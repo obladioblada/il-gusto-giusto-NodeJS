@@ -25,14 +25,12 @@ export class IntroComponent  implements OnInit {
     this.svg = this.intro.nativeElement;
     this.router.events.subscribe((e: Event) => {
       if (e instanceof NavigationStart ) {
-        // console.log(e);
         this.isHome = e.url === '/';
         // console.log('isHome' + this.isHome);
         if (this.isHome) {
           this.renderer.setStyle(this.svg, 'transition', 'all ' + this.brandAnimationTime + 's');
           this.renderer.setStyle(this.svg, 'WebkitTransition', 'all ' + this.brandAnimationTime + 's');
         }else {
-         // console.log(this.drawingFished);
           this.drawingFished = true;
         }
       }

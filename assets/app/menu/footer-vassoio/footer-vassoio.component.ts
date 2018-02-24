@@ -14,12 +14,9 @@ export class FooterVassoioComponent implements OnInit {
   constructor(private vassoioService: VassoioService) {
     this.count_items = this.vassoioService.count_carrello_element;
     this.totale = this.vassoioService.totale;
-    console.log("constructor vassoio footer");
       this.vassoioService.tryChanged.subscribe(
           () => {
               this.count_items = this.vassoioService.count_carrello_element;
-              console.log("footer updated");
-              console.log(this.count_items);
               this.totale =  this.vassoioService.totale;
           }
       );

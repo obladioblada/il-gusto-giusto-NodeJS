@@ -1,10 +1,8 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {FoodService} from '../services/food.service';
 import {VassoioService} from '../services/vassoio.service';
-import {CanDeactivate, Event, NavigationStart, Router} from '@angular/router';
+import {Event, NavigationStart, Router} from '@angular/router';
 import {Prodotto} from './model/prodotto.model';
-import {SaveOnDeactivate} from "../services/vassoio-guard.service";
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-menu',
@@ -12,8 +10,7 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./menu.component.css'],
   providers: []
 })
-export class MenuComponent implements SaveOnDeactivate{
-
+export class MenuComponent {
   onVassoioURL: boolean;
   trayEmpty: boolean;
   panini: Prodotto[] = [];
@@ -52,7 +49,7 @@ export class MenuComponent implements SaveOnDeactivate{
     this.foodService.getRESTProducts().subscribe(
         data => console.log(data),
         err => console.log(err),
-        () =>console.log('products loaded')
+        () =>{}
     );
   }
 
@@ -61,11 +58,5 @@ export class MenuComponent implements SaveOnDeactivate{
     saveOnLocal() {
         this.vassoioService.saveOnLocalStorage();
     }
-
-    canDeactivate():Observable<boolean> | Promise<boolean> | boolean{
-      //this.vassoioService.saveOnLocalStorage();
-      return true;
-    };
-
 
 }

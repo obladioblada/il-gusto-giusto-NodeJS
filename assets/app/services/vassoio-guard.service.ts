@@ -1,24 +1,20 @@
-import {ActivatedRouteSnapshot, CanActivate, CanDeactivate, RouterStateSnapshot} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {VassoioService} from "./vassoio.service";
 
-export interface SaveOnDeactivate{
-    canDeactivate:() => Observable<boolean> | Promise<boolean> | boolean;
-}
 
 @Injectable()
-export class VassoioGuardService implements CanActivate, CanDeactivate<SaveOnDeactivate>{
+export class VassoioGuardService implements CanActivate{
 
     constructor(private vassoioService: VassoioService){}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        this.vassoioService.loadFromLocalStorage();
+        console.log(this.vassoioService.count_carrello_element);
+        if (+localStorage.getItem('count_carrello_element')>0 && this.vassoioService.count_carrello_element==0) {
+            this.vassoioService.loadFromLocalStorage();
+        }
         return true;
-    }
-
-    canDeactivate(component: SaveOnDeactivate, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        return component.canDeactivate();
-    }
+    };
 
 }

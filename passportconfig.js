@@ -64,7 +64,6 @@ module.exports = function (passport) {
                         var userPojo = user.toObject();
 
                         if (userPojo.hasOwnProperty('local')) {
-                            console.log("trovato user con local account");
                             return done(null, false, {'signUpMessage': 'the email is already taken'});
                         }
                         if (userPojo.hasOwnProperty('facebbok')  || userPojo.hasOwnProperty('twitter') || userPojo.hasOwnProperty('google')) {
@@ -156,7 +155,6 @@ module.exports = function (passport) {
         // facebook will send back the token and profile
         function (accessToken, refreshToken, profile, done) {
 
-            console.log(profile);
             // asynchronous
             process.nextTick(function () {
                 // find the user in the database based on their facebook id

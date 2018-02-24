@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {VassoioService} from '../../services/vassoio.service';
 import {Prodotto} from '../model/prodotto.model';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -32,7 +32,6 @@ const moment =  _moment;
     ],
 })
 export class VassoioFormComponent implements OnInit {
-
   vassoio: Prodotto[] = [];
 
   gastronomia: Prodotto[] = [];
@@ -213,6 +212,12 @@ export class VassoioFormComponent implements OnInit {
 
   }
 
+  // save when leavaing app
+   @HostListener('window:beforeunload', ['$event'])
+    saveOnLocal(){
+        this.vassoioService.saveOnLocalStorage();
+   }
+
 
   onSendBooking() {
     this.router.navigate(['/conferma']);
@@ -239,6 +244,7 @@ export class VassoioFormComponent implements OnInit {
   onAddItem(prodotto) {
     this.vassoioService.onAddItem(prodotto);
     this.vassoioService.saveOnLocalStorage();
+
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -254,9 +260,7 @@ export class VassoioFormComponent implements OnInit {
           dateSelectedSplitted[3]===toDaySplitted[3]){
          this.filterHours();
       } else{
-          console.log('un altro giorno');
           // reset orario completo
-          console.log(this.hoursInterface);
           this.filteredhours = this.hoursInterface;
       }
   }
@@ -265,20 +269,16 @@ export class VassoioFormComponent implements OnInit {
        //let currentHour = this.today.getHours();
         let currentHour = 20;
         if(currentHour < this.APERTURA_MATTINA || currentHour > this.CHIUSURA_SERA) {
-            console.log('no-opem');
             this.filteredhours = this.hoursInterface;
 
             return;
         }
         else if (currentHour > this.APERTURA_SERA){
-            console.log('sera');
             // filtrare sera
             this.filteredhours = this.copy(this.hoursInterface.slice(1));
             this.filteredhours[0].hours= this.filteredhours[0].hours.filter(this.islater);
-            console.log(this.hoursInterface);
             return;
         } else if(currentHour >=this.APERTURA_MATTINA){
-            console.log('mattina');
             //filtrare gli orari di mattina
             this.filteredhours =  this.copy(this.hoursInterface.slice(0));
             this.filteredhours[0].hours= this.filteredhours[0].hours.filter(this.islater);

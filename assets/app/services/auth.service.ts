@@ -24,7 +24,6 @@ export class AuthService {
 
     signIn(user: User){
         const body = JSON.stringify(user);
-        console.log(body);
         const header = new HttpHeaders({'Content-type': 'application/json'});
         return this.http.post('http://localhost:3000/user/signin',body,{headers: header })
             .map((response: Response) => response)
