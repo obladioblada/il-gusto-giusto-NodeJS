@@ -20,6 +20,7 @@ import { SignUpComponent} from "./auth/sign-up/sign-up.component";
 import {HttpClientModule} from "@angular/common/http";
 import {BraintreeComponent} from "./menu/vassoio-form/braintree.component";
 import {BraintreeService} from "./services/braintree.service";
+import {DropdownDirective} from "./shared/dropdown.directive";
 
 
 // material imports
@@ -52,6 +53,7 @@ import {AuthGuardService} from "./services/auth-guard.service";
 import {BraintreeDirective} from "./braintree.directive";
 import {VassoioGuardService} from "./services/vassoio-guard.service";
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 @NgModule({
     declarations: [
@@ -70,7 +72,8 @@ import { AgmCoreModule } from '@agm/core';
         ConfirmationComponent,
         SignInComponent,
         SignUpComponent,
-        BraintreeComponent
+        BraintreeComponent,
+        DropdownDirective
     ],
     imports: [
         BrowserModule,
@@ -96,7 +99,8 @@ import { AgmCoreModule } from '@agm/core';
         MatCheckboxModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCjVfcCJ63Fwtco-q1CR32Bnp562xQWLAg'
-        })
+        }),
+        AgmSnazzyInfoWindowModule
     ],
     exports: [
         MatButtonModule,

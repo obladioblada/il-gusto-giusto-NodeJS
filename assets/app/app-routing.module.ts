@@ -15,7 +15,7 @@ import {VassoioGuardService} from "./services/vassoio-guard.service";
 const appRoutes: Routes = [
     {path: '',          component: HomeComponent},
     {path: 'prenota',   component: MenuComponent,
-                        canActivate: [AuthGuardService,VassoioGuardService]},
+                        canActivate: [VassoioGuardService]},
     {path: 'vassoio',   component: VassoioFormComponent,
                         canActivate:  [AuthGuardService, VassoioGuardService]},
     {path: 'chi',       component: ChiSiamoContainerComponent},

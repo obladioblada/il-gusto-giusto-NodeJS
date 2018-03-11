@@ -1,5 +1,5 @@
-<div style="width: 100%">
-  <mat-horizontal-stepper [linear]="true" style="margin-top: 80px; height: 100%">
+<div style="width: 100%; height:80vh;">
+  <mat-horizontal-stepper [linear]="true" style="margin-top: 80px; height: 100%" #stepper>
     <mat-step>
       <ng-template matStepLabel>VASSOIO</ng-template>
       <mat-card class="auth-card">
@@ -41,19 +41,12 @@
             <div class="row" style="margin-top: 10px; text-align: center">
               <button mat-button (click)="onResetVassoio()">RESET</button>
             </div>
-            <mat-divider></mat-divider>
-            <div class="row" style="margin-top: 10px">
-              <button mat-button routerLink="/prenota" style="float: left; margin-left: 16px;">INDIETRO</button>
-              <button mat-button matStepperNext style="float: right; margin-right: 16px;">AVANTI</button>
-            </div>
           </div>
           <ng-template #noItems>
             <div style="text-align: center" >
               <h4> NON CI SONO ARTICOLI NEL CARRELLO</h4>
             </div>
-           <div class="row" style="margin-top: 10px">
-             <button mat-button routerLink="/prenota" style="float: left">INDIETRO</button>
-           </div>
+
           </ng-template>
         </mat-card-content>
       </mat-card>
@@ -106,10 +99,6 @@
                 </div>
               </div>
             </div>
-            <div class="row" style="margin-top: 10px">
-              <button mat-button matStepperPrevious style="float: left; margin-left: 16px;">INDIETRO</button>
-              <button mat-button matStepperNext style="float: right; margin-right: 16px;">AVANTI</button>
-            </div>
           </mat-card-content>
          </mat-card>
        </form>
@@ -127,13 +116,16 @@
                       [buttonText]="'PAGA'">
               </app-braintree>
             </div>
-            <div class="row" style="margin-top: 10px">
-              <button mat-button matStepperPrevious style="float: left; margin-left: 16px;">INDIETRO</button>
-            </div>
           </mat-card-content>
         </mat-card>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
+    <div class="row" style="text-align: center;">
+        <button    mat-button (click)="goBack(stepper)">INDIETRO</button>
+        <button    mat-button routerLink="/prenota" *ngIf="vassoio?.length==0">INDIETRO</button>
+        <button    mat-button (click)="goForward(stepper)"  *ngIf="vassoio?.length!=0" [disabled]="stepper?.selectedIndex === stepper?._steps?.length-1">AVANTI
+        </button>
+    </div>
 </div>
 

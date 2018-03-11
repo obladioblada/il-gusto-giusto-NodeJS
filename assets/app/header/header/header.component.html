@@ -1,23 +1,23 @@
+<div class="hamburger-container" (click)="toggleDropDownMenu()" [ngClass]="showDrowDown? 'change' : ''">
+  <div class="bar1"></div>
+  <div class="bar2"></div>
+  <div class="bar3"></div>
+</div>
 <nav class="navbar navbar-light" [ngClass]=" isHome? 'background-home' : 'background-default' ">
-  <a class="navbar-brand" href="#">
-    <app-intro></app-intro>
-  </a>
-  <div class="hamburger-container" (click)="toggleDropDownMenu()" [ngClass]="showDrowDown? 'change' : ''">
-    <div class="bar1"></div>
-    <div class="bar2"></div>
-    <div class="bar3"></div>
-  </div>
+    <app-intro></app-intro>git
     <div class="login" (click)="onChangePage('signIn')" *ngIf="showLogin && !isLoggedIn()">
-      <img src="../../../../public/login.png" class="login-logout-icon"><div class="login-logout-text">LOGIN</div>
-    </div>
-    <div class="login" (click)="onLogOut()" *ngIf="isLoggedIn()">
-      <img src="../../../../public/logout.png"  class="login-logout-icon"><div class="login-logout-text">LOGOUT</div>
+      <img src="../../../../public/login.png" class="login-logout-icon">
     </div>
     <h4 class="login name" style="margin-right: 50px" *ngIf="isLoggedIn()">{{user.local.name}}</h4>
 </nav>
 <div class="app-dropdown" [ngClass]="showDrowDown? 'open' : 'closed'">
-  <ul class="list-group" >
-    <li class="list-group-item" *ngFor="let url of urls"> <a (click)="onChangePage(url.url)"> {{url.name}} </a></li>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let url of urls">
+        <a class="seventh before after" (click)="onChangePage(url.url)"> {{url.name}} </a>
+    </li>
+    <li class="list-group-item">
+      <a class="seventh before after" style="color: #b33c46" *ngIf="isLoggedIn()" (click)="onLogOut()"> LOGOUT </a>
+    </li>
   </ul>
 </div>
 

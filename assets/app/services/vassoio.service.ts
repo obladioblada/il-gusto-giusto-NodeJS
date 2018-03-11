@@ -58,17 +58,24 @@ export class VassoioService {
             if (p === el) {
                 if (p.quantita > 1) {
                     p.quantita--;
+                    console.log("elemento trovato e maggiore di 1")
                 } else {
+                    console.log("ultimo elemento - da eliminare");
                     // elimino l'elemento sia da questo array che dall'altro
                     this.vassoio.splice(this.vassoio.indexOf(p), 1);
                     this.elements.splice(this.elements.indexOf(el.elemento), 1);
+                    console.log(this.vassoio);
+                    console.log(this.elements);
                 }
                 this.totale = this.totale - p.elemento.prezzo;
                 this.count_carrello_element--;
+                console.log(this.count_carrello_element);
+                console.log(this.totale);
+                this.tryChanged.emit('removedElement');
+                this.saveOnLocalStorage();
             }
         }
-        this.tryChanged.emit('removedElement');
-        this.saveOnLocalStorage();
+
     }
 
     onAddItem(el) {
@@ -78,6 +85,7 @@ export class VassoioService {
                 p.quantita++;
                 this.totale = this.totale + p.elemento.prezzo;
             }
+
         }
         this.count_carrello_element++;
         this.tryChanged.emit('addElement');
@@ -91,12 +99,10 @@ export class VassoioService {
     }
 
     saveOnLocalStorage() {
-        if (this.vassoio.length > 0) {
             localStorage.setItem('vassoio', JSON.stringify(this.vassoio));
             localStorage.setItem('elements', JSON.stringify(this.elements));
             localStorage.setItem('count_carrello_element', JSON.stringify(this.count_carrello_element));
             localStorage.setItem('totale', JSON.stringify(this.totale));
-        }
     }
 
     loadFromLocalStorage() {

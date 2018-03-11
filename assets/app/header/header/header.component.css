@@ -7,20 +7,29 @@ nav{
 }
 a{
   text-decoration: none !important;
+  font-size: large;
+  transition: all 1s;
+  color: #9ad8ed;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 20px;
 }
 
 a:hover{
-  color:#b33c46 !important;;
+  box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0px 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
+  padding: 20px;
+
 }
 
 .navbar{
   position: fixed;
-  max-height: 80px;
-  min-height: 80px;
+  max-height: 60px;
+  min-height: 60px;
   border: none;
   border-radius: 0;
   width: 100%;
   z-index: 10000000;
+  box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0px 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
 }
 
 
@@ -33,7 +42,7 @@ a:hover{
 .navbar-brand {float:none;}
 
 .background-home{
-  background-color: #9ad8ed;
+  background-color: white;
   animation-name: changeNavBg;
   animation-duration: 3s;
   animation-delay: 6s;
@@ -60,14 +69,6 @@ a:hover{
   float: right;
   cursor: pointer;
   color: #9ad8ed;
-  /*animation-name: changeToogleColor;
-  animation-duration: 4s;
-  animation-delay: 5s;
-  -webkit-animation-fill-mode:forwards; !*Chrome 16+, Safari 4+*!
-  -moz-animation-fill-mode:forwards; !*FF 5+*!
-  -o-animation-fill-mode:forwards; !*Not implemented yet*!
-  animation-fill-mode:forwards; !*when the spec is finished*!
-*/
 }
 
 /* The animation code */
@@ -82,13 +83,11 @@ a:hover{
   width: 100%;
   height: 100%;
   background: white;
-  transition: all 0.5s;
-  z-index: 1000;
+  z-index: 1000000000;
+  transition: 0.3s;
 }
 
 .app-dropdown.open{
-
-
   visibility: visible;
   opacity: 100;
 
@@ -113,21 +112,6 @@ a:hover{
   margin: 50px;
 }
 
-a{
-  text-decoration: none;
-  font-size: large;
-  transition: all 1s;
-  color: #9ad8ed;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-a:hover{
-  font-size: 2.2em;
-
-}
-
-
 
 /* hamburger css */
 
@@ -135,12 +119,18 @@ a:hover{
 .hamburger-container {
   display: inline-block;
   cursor: pointer;
-  margin: 20px;
-  font-size: 40px;
+  font-size: 17px;
   float: right;
   color: #9ad8ed;
   position: absolute;
-  right: 0;
+  right: 15px;
+  top: 10px;
+  z-index: 100000000000;
+}
+
+.hamburger-container:hover>.bar1,.hamburger-container:hover>.bar2,.hamburger-container:hover>.bar3{
+  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+
 }
 
 .bar1, .bar2, .bar3 {
@@ -148,9 +138,15 @@ a:hover{
   height: 5px;
   background-color: #9ad8ed;
   margin: 6px 0;
-  transition: 0.4s;
+  transition: 0.2s;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
+
+
+/*.bar1:hover, .bar2:hover, .bar3:hover {
+  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}*/
+
 
 
 
@@ -170,9 +166,10 @@ a:hover{
 
 /* Rotate last bar */
 .change .bar3 {
-  height: 90vh;
+  height: 100vh;
   width: 5px;
-  transform: translate(18px, 18px);
+  transform: translate(18px, 10px);
+  transition: 0.3s;
 }
 
 
@@ -189,13 +186,13 @@ a:hover{
   cursor: pointer;
   float: right;
   position: absolute;
-  right: 81px;
-  top: 20px;
+  right: 20px;
+  top: 18px;
   text-align: center;
 }
 
 .login-logout-icon{
-  width: 30px;
+  width:25px;
 }
 
 .login-logout-text{
@@ -204,7 +201,10 @@ a:hover{
 
 .name{
   color: #9ad9ed;
+  top: 10px;
 }
+
+
 
 
 

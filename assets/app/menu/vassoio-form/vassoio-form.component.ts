@@ -7,6 +7,7 @@ import {DateAdapter} from '@angular/material/core';
 import {MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { MatStepper } from '@angular/material';
 
 import * as _moment from 'moment';
 import {Moment} from "moment";
@@ -308,6 +309,14 @@ export class VassoioFormComponent implements OnInit {
       }
       return output;
   }
+    // stepper
+    goBack(stepper: MatStepper){
+        stepper.previous();
+    }
+
+    goForward(stepper: MatStepper){
+        stepper.next();
+    }
 
 
 

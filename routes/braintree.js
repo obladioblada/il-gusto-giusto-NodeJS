@@ -21,7 +21,9 @@ router.get("/getclienttoken", function (req, res) {
 
 
 router.post("/createpurchase", function (req, res) {
-    let nonceFromTheClient = req.body.payment_method_nonce;
+    let nonceFromTheClient = req.body.nonce;
     // Use payment method nonce here
+    console.log("richiesta di pagamento avvenuta");
+    console.log(nonceFromTheClient);
 });
 module.exports = router;

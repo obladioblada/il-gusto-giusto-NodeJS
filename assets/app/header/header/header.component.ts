@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/core';
 import {Event, NavigationStart, Router} from '@angular/router';
 import {AuthService} from "../../services/auth.service";
 import {User} from "../../auth/user.model";
@@ -49,6 +49,7 @@ export class HeaderComponent implements OnInit {
       this.authService.usrEvent.subscribe((event: Event) =>{
           this.user = this.authService.user;
       });
+    if(this.isLoggedIn()) this.user = JSON.parse(localStorage.getItem('user'));
   }
 
 
@@ -70,6 +71,14 @@ export class HeaderComponent implements OnInit {
   isLoggedIn(){
    return this.authService.isLoggedIn()
   }
+
+    // save when leavaing app
+    @HostListener('window:beforeunload', ['$event'])
+    saveUserOnLocal() {
+      if(this.isLoggedIn()){
+          localStorage.setItem('user', JSON.stringify(this.user));
+      }
+    }
 
 
 }

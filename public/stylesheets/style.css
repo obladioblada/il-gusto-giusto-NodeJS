@@ -22,6 +22,7 @@ body{
   animation-name: changeBodyBg;
   animation-duration: 3s;
   animation-delay: 6s;
+  margin: 0 !important;
   -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
   -moz-animation-fill-mode:forwards; /*FF 5+*/
   -o-animation-fill-mode:forwards; /*Not implemented yet*/
@@ -51,15 +52,10 @@ body{
 
 
 /* The animation code */
-@keyframes changeBodyBg {
-  from {background-color: white;}
+/*@keyframes changeBodyBg {
+  from {background-color: gray;}
   to {background-color: rgba(255, 255, 255, 0.83);}
-}
-
-.mat-tab-header,.mat-horizontal-stepper-header-container{
-  box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28) !important;
-
-}
+}*/
 
 
 .card-container{
@@ -135,10 +131,11 @@ button.mat-primary {
   overflow: hidden;
   position: fixed !important;
   flex-shrink: 0;
-  z-index: 100 !important;
+  z-index: 100000000 !important;
   background: white !important;
   width: 100% !important;
-  margin-top: 80px !important;
+  box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0px 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
+  margin-top: 60px !important;
 }
 
 
@@ -319,5 +316,3 @@ input:-webkit-autofill:active {
     transform: rotate(450deg);
   }
 }
-
-svg:nth-child(1){stroke:#9ad9ed;}

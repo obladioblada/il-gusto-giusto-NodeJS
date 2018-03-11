@@ -65,6 +65,7 @@ export class BraintreeComponent implements OnInit {
         if (this.instance) {
             this.instance.requestPaymentMethod((err, payload) => {
                 this.showDropinUI = false;
+                console.log(payload.nonce);
                 this.btService
                     .createPurchase(this.createPurchaseURL, payload.nonce)
                     .subscribe((status: any) => {
