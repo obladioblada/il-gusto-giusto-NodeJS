@@ -1,5 +1,5 @@
 {
-  "name": "udemy-nodejs-angular2",
+  "name": "il-gusto-giusto",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -25,7 +25,9 @@
     "@angular/platform-server": "^5.0.0",
     "@angular/router": "^5.0.0",
     "@angular/upgrade": "^5.0.0",
+    "angular2-image-upload": "^1.0.0-rc.0",
     "bcryptjs": "^2.4.3",
+    "blueimp-canvas-to-blob": "^3.14.0",
     "body-parser": "~1.15.2",
     "bootstrap": "^3.3.7",
     "braintree": "^2.6.0",
@@ -44,6 +46,7 @@
     "moment": "^2.20.1",
     "mongoose": "^5.0.3",
     "morgan": "~1.6.1",
+    "ng2-img-tools": "^1.1.3",
     "ngx-braintree": "^3.3.0",
     "nodemailer": "^4.4.2",
     "passport": "^0.4.0",

@@ -68,6 +68,7 @@ body{
 }
 
 
+
 .mat-card-image{
   object-fit: cover !important; /*this makes de image in src fit to the size of specified below*/
   width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
@@ -315,4 +316,42 @@ input:-webkit-autofill:active {
     -webkit-transform: rotate(450deg);
     transform: rotate(450deg);
   }
+}
+
+
+.customClass .img-ul-upload {
+  background-color: #9ad9ed !important;
+}
+
+.customClass .img-ul-clear {
+  background-color: #b8423f !important;
+}
+
+.customClass .img-ul-drag-box-msg {
+  color: #9ad9ed !important;
+}
+
+.customClass .img-ul-container {
+  background-color: white !important;
+  border-radius: 20px;
+  transform: translateX(40%);
+}
+
+.customClass .img-ul-image{
+  border-radius: 50% !important;
+  background-size: unset !important;
+  background-repeat: round !important;
+
+}
+
+.customClass .img-ul-x-mark{
+  background-color: #b33c46 !important;
+  color: white !important;
+  opacity: 1 !important;
+  border-radius: 50% !important;
+}
+
+.customClass .img-ul-close{
+  padding-right: 1px !important;
+
 }

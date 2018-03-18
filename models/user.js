@@ -10,26 +10,31 @@ var schema = new Schema({
         surname     :String,
         password    :String,
         email       :String,
+        photoSrc    :String
     },
     facebook        : {
         id          :String,
         token       :String,
         name        :String,
         surname     :String,
-        email       :String
+        email       :String,
+        photoUrl    :String
     },
     twitter         : {
         id          : String,
         token       : String,
         displayName : String,
         name        : String,
-        email       : String
+        email       : String,
+        photoUrl     :String
     },
     google          : {
         id          : String,
         token       : String,
         email       : String,
         name        : String,
+        surname     : String,
+        photoUrl    : String
     }
 });
 

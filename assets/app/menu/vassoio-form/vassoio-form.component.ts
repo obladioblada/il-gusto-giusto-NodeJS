@@ -234,6 +234,7 @@ export class VassoioFormComponent implements OnInit {
       localStorage.removeItem('elements');
       localStorage.removeItem('count_carrello_element');
       localStorage.removeItem('totale');
+      this.vassoioService.tryChanged.emit("reset");
   }
 
   onDeleteItem(prodotto) {

@@ -130,7 +130,7 @@ a:hover{
 
 .hamburger-container:hover>.bar1,.hamburger-container:hover>.bar2,.hamburger-container:hover>.bar3{
   box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-
+;
 }
 
 .bar1, .bar2, .bar3 {
@@ -185,15 +185,72 @@ a:hover{
 .login{
   cursor: pointer;
   float: right;
-  position: absolute;
-  right: 20px;
+  margin-right: 70px;
   top: 18px;
   text-align: center;
 }
 
 .login-logout-icon{
   width:25px;
+  cursor: pointer;
+  margin-right: 60px;
 }
+
+.bg-circle{
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  margin-top: 12px;
+  cursor: pointer;
+  background-color: #b33c46;
+  color: white;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  transition: all 1s;
+}
+
+.bg-circle:hover{
+  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.bg-circle:hover > .l1 {
+}
+
+.bg-circle:hover > .l2 {
+
+ }
+
+.bg-circle:hover > .l3 {
+}
+
+.l1,.l2,.l3{
+  height: 2px;
+  background: white;
+  position: absolute;
+  border-radius: 2px;
+  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  transition: all 1s;
+}
+
+.l1{
+  margin-left: 9px;
+  margin-top: 17px;
+  width: 14px;
+}
+
+.l2{
+  transform: rotate(45deg);
+  margin-top: 14px;
+  margin-left: 19px;
+  width: 10px;
+}
+
+.l3{
+  transform: rotate(-45deg);
+  margin-top: 20px;
+  margin-left: 19px;
+  width: 10px;
+}
+
 
 .login-logout-text{
   color: #b33c46;
@@ -204,7 +261,25 @@ a:hover{
   top: 10px;
 }
 
+.icon-profile{
+  color: #9ad9ed;
+  top: 11px;
+  font-size: 40px;
+  position: absolute;
+  right: 60px;
+  cursor: pointer
+}
 
+.photo-profile{
+  color: #9ad9ed;
+  top: 10px;
+  position: absolute;
+  right: 60px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+}
 
-
-
+h6{
+  margin: 0 !important;
+}

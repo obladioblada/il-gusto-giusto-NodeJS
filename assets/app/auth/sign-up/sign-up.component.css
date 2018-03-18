@@ -8,9 +8,10 @@
     margin: auto;
     padding: 10px;
     border-radius: 55%;
-    background-color: #8080803d;
-    color: #9ad9ed;
+    background: #9ad9ed;
+    color: white;
     font-size: 80px;
+    cursor: pointer;
 }
 
 .card-center{

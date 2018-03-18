@@ -24,13 +24,13 @@ export class HeaderComponent implements OnInit {
   isHome: boolean;
   navbar: any;
   showLogin = true;
-  user: any;
+  user: User;
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
               private router: Router,
               private authService:AuthService) {
-      this.user  = { local: {name:''}};
+      this.user ={};
   }
 
   ngOnInit() {
@@ -47,6 +47,7 @@ export class HeaderComponent implements OnInit {
       }
 
       this.authService.usrEvent.subscribe((event: Event) =>{
+          console.log(this.authService.user);
           this.user = this.authService.user;
       });
     if(this.isLoggedIn()) this.user = JSON.parse(localStorage.getItem('user'));
@@ -59,12 +60,17 @@ export class HeaderComponent implements OnInit {
 
   onChangePage(url: string) {
     this.showDrowDown = false;
-    this.router.navigate(['/', url]);
+    setTimeout(()=>{
+      console.log("aspetto un secondo");
+        this.router.navigate(['/', url]);
+    },1000);
+
 
   }
 
   onLogOut(){
     this.authService.logout();
+    this.showDrowDown = false;
     this.router.navigate(['/']);
   }
 

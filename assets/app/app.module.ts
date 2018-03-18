@@ -28,6 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,  } from '@angular/forms';
 
+import { ImageUploadModule } from "angular2-image-upload";
+
 
 import {
     MatButtonModule,
@@ -46,6 +48,7 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatDialogModule,
 } from '@angular/material';
 import 'hammerjs';
 import {AuthService} from "./services/auth.service";
@@ -54,6 +57,8 @@ import {BraintreeDirective} from "./braintree.directive";
 import {VassoioGuardService} from "./services/vassoio-guard.service";
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import {FileNameDialogComponent} from "./auth/sign-up/file-name-dialog.component";
+import {Ng2ImgToolsModule, Ng2ImgToolsService} from "ng2-img-tools";
 
 @NgModule({
     declarations: [
@@ -73,6 +78,7 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
         SignInComponent,
         SignUpComponent,
         BraintreeComponent,
+        FileNameDialogComponent,
         DropdownDirective
     ],
     imports: [
@@ -97,6 +103,9 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
         MatRadioModule,
         HttpClientModule,
         MatCheckboxModule,
+        ImageUploadModule.forRoot(),
+        MatDialogModule,
+        Ng2ImgToolsModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCjVfcCJ63Fwtco-q1CR32Bnp562xQWLAg'
         }),
@@ -126,9 +135,11 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
         AuthService,
         AuthGuardService,
         BraintreeService,
-        VassoioGuardService
+        VassoioGuardService,
+        Ng2ImgToolsService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [FileNameDialogComponent]
 })
 export class AppModule {
     constructor() {

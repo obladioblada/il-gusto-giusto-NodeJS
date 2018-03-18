@@ -47,7 +47,8 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook'), functio
         user =
             { message:'socessfully logged in with facebook',
                 token: token,
-                user: req.user
+                user: req.user,
+                social:'facebook'
             };
         const query = querystring.stringify({
             "SocialLogin": true,
@@ -101,7 +102,8 @@ router.get('/auth/twitter/callback', passport.authenticate('twitter'), function 
         user = {
             message:'socessfully logged in with facebook',
             token: token,
-            user: req.user
+            user: req.user,
+            social:'twitter'
         };
         const query = querystring.stringify({
             "SocialLogin": true,
@@ -126,7 +128,8 @@ router.get('/auth/google/callback', passport.authenticate('google'), function (r
     user = {
         message:'socessfully logged in with facebook',
         token: token,
-        user: req.user
+        user: req.user,
+        social:'google'
     };
     const query = querystring.stringify({
         "SocialLogin": true,
@@ -140,7 +143,6 @@ router.get('/auth/google/callback', passport.authenticate('google'), function (r
 
 
 router.post('/checkemail', function (req, res,next) {
-    console.log(req.body.email);
     User.findOne({'local.email': req.body.email}, function (err, user) {
         if(err){
             return res.status(500).json({

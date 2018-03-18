@@ -61,7 +61,7 @@ module.exports = function (passport) {
                     // check to see if theres already a user with that email
 
                     if (user) {
-                        var userPojo = user.toObject();
+                        let userPojo = user.toObject();
 
                         if (userPojo.hasOwnProperty('local')) {
                             return done(null, false, {'signUpMessage': 'the email is already taken'});
@@ -72,6 +72,7 @@ module.exports = function (passport) {
                             user.local.surname = req.body.surname;
                             user.local.email = email;
                             user.local.password = user.generateHash(password);
+                            user.local.photoSrc = req.body.photoSrc;
                             // save the user
                             user.save(function (err) {
                                 if (err) {
@@ -90,7 +91,8 @@ module.exports = function (passport) {
                             name: req.body.name,
                             surname: req.body.surname,
                             email: email,
-                            password: newUser.generateHash(password)
+                            password: newUser.generateHash(password),
+                            photoSrc: req.body.photoSrc
                         };
 
                         // save the user
@@ -157,6 +159,8 @@ module.exports = function (passport) {
 
             // asynchronous
             process.nextTick(function () {
+                console.log("USER");
+                console.log(profile);
                 // find the user in the database based on their facebook id
                 User.findOne({'facebook.id': profile.id}, function (err, user) {
 
@@ -190,7 +194,9 @@ module.exports = function (passport) {
                                 user.facebook.id = profile.id;
                                 user.facebook.token = accessToken;
                                 user.facebook.name = profile.name.givenName;
+
                                 user.facebook.surname = profile.name.familyName;
+                                user.facebook.photoUrl = profile.photos[0].value;
                                 var email = profile.email || profile.emails[0].value;
                                 if (!email) {
                                     console.log('this user has no email in his fb');
@@ -208,14 +214,15 @@ module.exports = function (passport) {
                             } else {
                                 console.log("local accunt non trovate");
                                 // if there is no user found with that facebook id, create them
-                                var newUser = new User();
-
+                                let newUser = new User();
+                                console.log(profile);
                                 // set all of the facebook information in our user model
                                 newUser.facebook.id = profile.id;
                                 newUser.facebook.token = accessToken;
                                 newUser.facebook.name = profile.name.givenName;
                                 newUser.facebook.surname = profile.name.familyName;
-                                var email = profile.email || profile.emails[0].value;
+                                newUser.facebook.photoUrl = profile.photos[0].value;
+                                let email = profile.email || profile.emails[0].value;
                                 if (!email) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
@@ -290,7 +297,8 @@ module.exports = function (passport) {
                                 user.twitter.token = token;
                                 user.twitter.name = profile.name;
                                 user.twitter.displayName = profile.displayName;
-                                var email = profile.email || profile.emails[0].value;
+                                user.twitter.photoUrl = profile.photos[0].value;
+                                let email = profile.email || profile.emails[0].value;
                                 if (!email) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
@@ -308,12 +316,13 @@ module.exports = function (passport) {
                                 console.log("local accunt non trovate");
                                 // if there is no user found with that facebook id, create them
                                 // if there is no user, create them
-                                var newUser = new User();
+                                let newUser = new User();
                                 newUser.twitter.id = profile.id;
                                 newUser.twitter.token = token;
                                 newUser.twitter.name = profile.name;
                                 newUser.twitter.displayName = profile.displayName;
-                                var email = profile.email || profile.emails[0].value;
+                                newUser.twitter.photoUrl = profile.photos[0].value;
+                                let email = profile.email || profile.emails[0].value;
                                 if (!email) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
@@ -357,6 +366,8 @@ module.exports = function (passport) {
         // make the code asynchronous
         // User.findOne won't fire until we have all our data back from Google
 
+        console.log(profile);
+
         process.nextTick(function () {
 
             User.findOne({'google.id': profile.id}, function (err, user) {
@@ -383,11 +394,12 @@ module.exports = function (passport) {
                         //if user is found , then let's crate an email field for the local account
                         if (user) {
                             console.log("travato local accunt");
-                            console.log(user);
                             user.google.id = profile.id;
                             user.google.token = token;
-                            user.google.name = profile.displayName;
-                            var email = profile.email || profile.emails[0].value;
+                            user.google.name = profile.displayName.toString().split(" ")[0];
+                            user.google.surname = profile.displayName.toString().split(" ")[1];
+                            user.google.photoUrl = profile.photos[0].value;
+                            let email = profile.email || profile.emails[0].value;
                             if (!email) {
                                 console.log('this user has no email in his fb');
                                 return done({message: 'this user has no email in his fb'});
@@ -405,11 +417,13 @@ module.exports = function (passport) {
                             console.log("local accunt non trovate");
                             // if there is no user found with that facebook id, create them
                             // if there is no user, create them
-                            var newUser = new User();
+                            let newUser = new User();
                             newUser.google.id = profile.id;
                             newUser.google.token = token;
-                            newUser.twitter.name = profile.displayName;
-                            var email = profile.email || profile.emails[0].value;
+                            newUser.google.name = profile.displayName.toString().split(" ")[0];
+                            newUser.google.surname = profile.displayName.toString().split(" ")[1];
+                            newUser.google.photoUrl = profile.photos[0].value;
+                            let email = profile.email || profile.emails[0].value;
                             if (!email) {
                                 console.log('this user has no email in his fb');
                                 return done({message: 'this user has no email in his fb'});

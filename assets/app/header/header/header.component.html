@@ -4,11 +4,21 @@
   <div class="bar3"></div>
 </div>
 <nav class="navbar navbar-light" [ngClass]=" isHome? 'background-home' : 'background-default' ">
-    <app-intro></app-intro>git
+
     <div class="login" (click)="onChangePage('signIn')" *ngIf="showLogin && !isLoggedIn()">
-      <img src="../../../../public/login.png" class="login-logout-icon">
+        <div class="bg-circle">
+            <div class="l1"></div>
+            <div class="l2"></div>
+            <div class="l3"></div>
+        </div>
     </div>
-    <h4 class="login name" style="margin-right: 50px" *ngIf="isLoggedIn()">{{user.local.name}}</h4>
+ <app-footer-vassoio></app-footer-vassoio>
+    <div *ngIf="isLoggedIn()">
+    <h6 class="login name" style="margin-right: 50px" *ngIf="user!=undefined">{{user.name}}</h6>
+        <i class="material-icons icon-profile" *ngIf="user.photoUrl===undefined">account_circle</i>
+        <img class="photo-profile" *ngIf="user.photoUrl!==undefined" src="{{user.photoUrl}}">
+    </div>
+    <app-intro></app-intro>
 </nav>
 <div class="app-dropdown" [ngClass]="showDrowDown? 'open' : 'closed'">
   <ul class="list-group">

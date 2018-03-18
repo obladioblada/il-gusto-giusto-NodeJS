@@ -1,14 +1,13 @@
 .panel-footer{
-    background-color: #9ad8ed;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 0;
+    background-color: transparent !important;
+    position: absolute;
+    /* height: 0; */
     line-height: 0;
-    margin: 0;
+    /* margin: 0; */
     transition: all 0.4s ease-out;
     z-index: 100;
     border: none;
+    right: 100px;
 }
 
 
@@ -17,7 +16,7 @@
 }
 
 .closed{
-  bottom: -60px;
+  bottom: 160px;
 }
 
 
@@ -27,13 +26,12 @@
 }
 
 .tot{
-  float: right;
-  padding: 20px;
-  margin-right: 22px;
-  height: 40px;
-  color: white;
-  background-color: #b33c46;
-  cursor: pointer;
+    float: right;
+    /* padding: 20px; */
+    /* margin-right: 22px; */
+    /* height: 40px; */
+    color: #b33c46;
+    cursor: pointer;
 }
 
 .tot:hover{
@@ -41,12 +39,12 @@
 }
 
 .shop-icon{
-  font-size: 35px;
-  color: white;
-  float: right;
-  cursor: pointer;
-  line-height: 0 !important;
-  margin-right: -10px;
-  margin-left: 10px;
+    font-size: 35px;
+    color: #b33c46;
+    /* float: right; */
+    cursor: pointer;
+    /* line-height: 0 !important; */
+    /* margin-right: -10px; */
+    /* margin-left: 10px; */
 }
 

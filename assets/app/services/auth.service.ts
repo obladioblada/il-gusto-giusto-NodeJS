@@ -3,18 +3,25 @@ import {EventEmitter, Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
+import { Ng2ImgToolsService } from 'ng2-img-tools';
 
 
 
 @Injectable()
 export class AuthService {
 
-    user: any;
+    user: User;
     usrEvent = new EventEmitter<any>();
+    imageToUpload : any;
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,private  ng2ImgToolsService: Ng2ImgToolsService){
+
+    }
 
     signUp(user: User){
+        //settare bele l'immagine per mongo e aggiungerlo all'user
+        user.photoSrc = this.imageToUpload.src;
+        console.log(user);
         const body = JSON.stringify(user);
         const header = new HttpHeaders({'Content-type': 'application/json'});
         return this.http.post('http://localhost:3000/user/signup',body,{headers: header })

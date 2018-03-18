@@ -9,3 +9,7 @@
 .plus-one-icon{
   color: white;
 }
+
+.food-card:hover {
+  background: #dcdcdc38 !important;
+}

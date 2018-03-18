@@ -8,9 +8,9 @@
     margin: auto;
     padding: 10px;
     border-radius: 55%;
-    background: #8080803d;
-    color: #9ad9ed;
     font-size: 80px;
+    background: #9ad9ed;
+    color: white;
 }
 
 .card-center{
@@ -46,3 +46,4 @@
     cursor: pointer;
 }
 
+a:hover{text-decoration: none !important;}

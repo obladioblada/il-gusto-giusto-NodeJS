@@ -122,8 +122,8 @@
     </mat-step>
   </mat-horizontal-stepper>
     <div class="row" style="text-align: center;">
-        <button    mat-button (click)="goBack(stepper)">INDIETRO</button>
-        <button    mat-button routerLink="/prenota" *ngIf="vassoio?.length==0">INDIETRO</button>
+        <button    mat-button (click)="goBack(stepper)" *ngIf="vassoio?.length!=0 && stepper.selectedIndex !== 0;">INDIETRO</button>
+        <button    mat-button routerLink="/prenota" *ngIf="vassoio?.length==0 || stepper.selectedIndex === 0;">INDIETRO</button>
         <button    mat-button (click)="goForward(stepper)"  *ngIf="vassoio?.length!=0" [disabled]="stepper?.selectedIndex === stepper?._steps?.length-1">AVANTI
         </button>
     </div>

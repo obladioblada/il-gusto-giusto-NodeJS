@@ -1,6 +1,4 @@
-<div class="row panel-footer" [ngClass]="count_items === 0 ? 'closed': 'open'">
-
-  <mat-card [routerLink]="['/vassoio']" class="tot">{{totale   | currency:'EUR':'symbol ' }}
-    <i class="material-icons shop-icon">shopping_basket</i>
-  </mat-card>
+<div [routerLink]="['/vassoio']" class="tot panel-footer" *ngIf="isLoggedIn()" [ngClass]="count_items === 0 ? 'closed': 'open'">
+    <i class="material-icons shop-icon">shopping_cart</i>
 </div>
+

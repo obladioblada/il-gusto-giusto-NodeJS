@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
 
     isLinear = true;
     signInFormGroup: FormGroup;
+    user: User;
 
     constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
@@ -27,7 +28,11 @@ export class SignInComponent implements OnInit {
         (queryParams: Params) =>{
             if(queryParams['SocialLogin']) {
                 this.authService.fetchSocialDataLogin().subscribe(
-                    data => this.setToken(data),
+                    data => {
+                        this.normalizedUser(data);
+                        if (this.user != undefined ) this.authService.user = this.user;
+                        this.setToken(data)
+                    },
                     err => console.log(err)
                 );
             }
@@ -68,13 +73,52 @@ export class SignInComponent implements OnInit {
     }
 
     setToken(data){
-        this.authService.user = data.user;
+
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.user._id);
         this.authService.usrEvent.emit('utenteLoggato');
         console.log('utente loggato');
         this.router.navigate(['/prenota']);
     }
+
+    normalizedUser(data){
+        this.user = new User("");
+        switch (data.social){
+            case "facebook" :
+                this.user = new User(
+                    data.user.facebook.email,
+                    null,
+                    data.user.facebook.name,
+                    data.user.facebook.surname,
+                    null,
+                    data.user.facebook.photoUrl,
+                    data.user.facebook.id);
+                break;
+            case "twitter" :
+                this.user = new User(
+                     data.user.twitter.email,
+                    null,
+                     data.user.twitter.name,
+                    null,
+                    null,
+                     data.user.twitter.photoUrl,
+                     data.user.twitter.id);
+                break;
+            case "google" :
+                this.user = new User(
+                    data.user.google.email,
+                    null,
+                    data.user.google.name,
+                    data.user.google.surname,
+                    null,
+                    data.user.google.photoUrl,
+                    data.user.google.id);
+                console.log("normalize user coming from" + data.social);
+                break;
+
+        }
+    }
+
 
 
 }

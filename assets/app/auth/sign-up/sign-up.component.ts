@@ -3,6 +3,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {User} from "../user.model";
 import {Router} from "@angular/router";
+import {MatDialog, MatDialogRef} from "@angular/material";
+import {FileNameDialogComponent} from "./file-name-dialog.component";
+
 
 @Component({
   selector: 'app-sign-up',
@@ -12,8 +15,10 @@ import {Router} from "@angular/router";
 export class SignUpComponent implements OnInit {
 
   signUpForm: FormGroup;
+  fileNameDialogRef: MatDialogRef<FileNameDialogComponent>;
+  image: any = null;
 
-  constructor(private authSercive: AuthService, private router: Router) { }
+  constructor(private authSercive: AuthService, private router: Router,private dialog: MatDialog) { }
 
   ngOnInit() {
    this.signUpForm = new FormGroup({
@@ -29,7 +34,7 @@ export class SignUpComponent implements OnInit {
       const surname = this.signUpForm.value.surname;
       const email = this.signUpForm.value.email;
       const password = this.signUpForm.value.password;
-      const user = new User(email,password,name,surname, false);
+      const user = new User(email,password,name,surname, false,null,null, this.image);
       this.authSercive.signUp(user)
           .subscribe(
               data => {console.log(data)
@@ -41,4 +46,14 @@ export class SignUpComponent implements OnInit {
 
   }
 
+    /*uploadPhoto(){
+      console.log("load photo from local");
+    }*/
+
+    openAddFileDialog(){
+        this.fileNameDialogRef = this.dialog.open(FileNameDialogComponent,{
+            hasBackdrop: true
+        });
+    }
 }
+
