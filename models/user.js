@@ -10,7 +10,7 @@ var schema = new Schema({
         surname     :String,
         password    :String,
         email       :String,
-        photoSrc    :String
+        photoUrl    :String
     },
     facebook        : {
         id          :String,

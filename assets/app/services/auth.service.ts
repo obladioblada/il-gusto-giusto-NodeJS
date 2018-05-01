@@ -3,7 +3,7 @@ import {EventEmitter, Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
-import { Ng2ImgToolsService } from 'ng2-img-tools';
+
 
 
 
@@ -12,19 +12,22 @@ export class AuthService {
 
     user: User;
     usrEvent = new EventEmitter<any>();
-    imageToUpload : any;
+    fd= new FormData();
 
-    constructor(private http: HttpClient,private  ng2ImgToolsService: Ng2ImgToolsService){
 
+    constructor(private http: HttpClient){
     }
 
-    signUp(user: User){
-        //settare bele l'immagine per mongo e aggiungerlo all'user
-        user.photoSrc = this.imageToUpload.src;
-        console.log(user);
-        const body = JSON.stringify(user);
-        const header = new HttpHeaders({'Content-type': 'application/json'});
-        return this.http.post('http://localhost:3000/user/signup',body,{headers: header })
+    signUp(user: User, image: any){
+        console.log(image);
+        if (image != null) { this.fd.append('image',image, image.name); }
+        this.fd.append('name',user.name);
+        this.fd.append('surname',user.surname);
+        this.fd.append('email',user.email);
+        this.fd.append('password',user.password);
+        const header = new HttpHeaders();
+        return this.http.post('http://localhost:3000/user/signup', this.fd,
+             {headers: header })
            .map((response: Response) => response)
            .catch((error: Response) => Observable.throw(error));
     }

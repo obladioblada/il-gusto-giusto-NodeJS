@@ -1,41 +1,20 @@
-var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
-var TwitterStrategy = require('passport-twitter').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var bcrypt = require('bcryptjs');
+let LocalStrategy = require('passport-local').Strategy;
+let FacebookStrategy = require('passport-facebook').Strategy;
+let TwitterStrategy = require('passport-twitter').Strategy;
+let GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+let cloudinary = require('./cloudinaryconfig');
+let User = require('./models/user');
 
-//load user model
-var User = require('./models/user');
-
-// load the auth variables
-var configAuth = require('./socialauthconfig');
-
-// expose this function to our app using module.exports
+let configAuth = require('./socialauthconfig');
 module.exports = function (passport) {
-
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
-
-    // used to serialize user for the session
     passport.serializeUser(function (user, done) {
         done(null, user.id);
-    })
-
-    // used to deserialize user
+    });
     passport.deserializeUser(function (id, done) {
         User.findById(id, function (err, user) {
             done(err, user);
         })
     });
-
-    // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local
 
     passport.use('local-signup', new LocalStrategy({
             usernameField: 'email',
@@ -43,9 +22,9 @@ module.exports = function (passport) {
             passReqToCallback: true
         },
         function (req, email, password, done) {
+            console.log("dhdhdhdhdd");
+            console.log(req.body.photoUrl);
             process.nextTick(function () {
-                // find a user whose email is the same as the forms email
-                // we are checking to see if the user trying to login already exists
                 User.findOne({
                     $or: [{'local.email': email},
                         {'twitter.email': email},
@@ -53,20 +32,17 @@ module.exports = function (passport) {
                         {'facebook.email': email}
                     ]
                 }, function (err, user) {
-                    // if there are any errors, return the error
                     if (err) {
                         return done(err);
                     }
-
-                    // check to see if theres already a user with that email
-
                     if (user) {
                         let userPojo = user.toObject();
 
                         if (userPojo.hasOwnProperty('local')) {
                             return done(null, false, {'signUpMessage': 'the email is already taken'});
                         }
-                        if (userPojo.hasOwnProperty('facebbok')  || userPojo.hasOwnProperty('twitter') || userPojo.hasOwnProperty('google')) {
+                        if (userPojo.hasOwnProperty('facebbok')  || userPojo.hasOwnProperty('twitter') ||
+                            userPojo.hasOwnProperty('google')) {
                             console.log("trovato user con account social");
                             user.local.name = req.body.name;
                             user.local.surname = req.body.surname;
@@ -83,16 +59,17 @@ module.exports = function (passport) {
                         }
                     }
                     else {
-                        //if the use has at least one of the social account, then update the user information, otherwise create a new one
-
-                        // let's create a new user
-                        var newUser = new User();
+                        console.log(req);
+                        cloudinary.uploader.upload(req.body.photoSrc, function(result) {
+                            console.log(result)
+                        });
+                        const newUser = new User();
                         newUser.local = {
                             name: req.body.name,
                             surname: req.body.surname,
                             email: email,
                             password: newUser.generateHash(password),
-                            photoSrc: req.body.photoSrc
+                            photoSrc: null
                         };
 
                         // save the user
@@ -107,22 +84,12 @@ module.exports = function (passport) {
             })
         }));
 
-    // =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
     passport.use('local-signin', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
+            passReqToCallback: true
         },
         function (req, email, password, done) {
-            // callback with email and password from our form
-
-            // find a user whose email is the same as the forms email
-            // we are checking to see if the user trying to login already exists
             User.findOne({'local.email': req.body.email}, function (err, user) {
 
                 // if there are any errors, return the error before anything else
@@ -139,14 +106,7 @@ module.exports = function (passport) {
                 // all is well, return successful user
                 return done(null, user);
             });
-
-
-        }));
-
-
-    // =========================================================================
-    // FACEBOOK ================================================================
-    // =========================================================================
+    }));
 
     passport.use(new FacebookStrategy({
             clientID: configAuth.facebookAuth.clientID,
@@ -154,47 +114,30 @@ module.exports = function (passport) {
             callbackURL: configAuth.facebookAuth.callbackURL,
             profileFields: configAuth.facebookAuth.profileFields
         },
-        // facebook will send back the token and profile
         function (accessToken, refreshToken, profile, done) {
-
-            // asynchronous
             process.nextTick(function () {
                 console.log("USER");
                 console.log(profile);
-                // find the user in the database based on their facebook id
                 User.findOne({'facebook.id': profile.id}, function (err, user) {
-
-                    // if there is an error, stop everything and return that
-                    // ie an error connecting to the database
                     if (err)
                         return done(err);
-
-                    // if the user is found, then log them in
                     if (user) {
-                        return done(null, user); // user found, return that user
+                        return done(null, user);
                     } else {
-                        // if there is no user found with that facebook id, check if there is a user with the same email
                         User.findOne({
                             $or: [{'local.email': profile.email || profile.emails[0].value},
                                 {'twitter.email': profile.email || profile.emails[0].value},
                                 {'google.email': profile.email || profile.emails[0].value}
                             ]
                         }, function (err, user) {
-
-                            // if there is an error, stop everything and return that
-                            // ie an error connecting to the database
-
                             if (err)
                                 return done(err);
-
-                            //if user is found , then let's crate an email field for the local account
                             if (user) {
                                 console.log("travato local accunt");
                                 console.log(user);
                                 user.facebook.id = profile.id;
                                 user.facebook.token = accessToken;
                                 user.facebook.name = profile.name.givenName;
-
                                 user.facebook.surname = profile.name.familyName;
                                 user.facebook.photoUrl = profile.photos[0].value;
                                 var email = profile.email || profile.emails[0].value;
@@ -202,21 +145,16 @@ module.exports = function (passport) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
                                 }
-                                user.facebook.email = email; // facebook can return multiple emails so we'll take the first
-                                // save our user to the database
+                                user.facebook.email = email;
                                 user.save(function (err) {
                                     if (err)
                                         throw err;
-
-                                    // if successful, return the new user
                                     return done(null, user);
                                 });
                             } else {
                                 console.log("local accunt non trovate");
-                                // if there is no user found with that facebook id, create them
                                 let newUser = new User();
                                 console.log(profile);
-                                // set all of the facebook information in our user model
                                 newUser.facebook.id = profile.id;
                                 newUser.facebook.token = accessToken;
                                 newUser.facebook.name = profile.name.givenName;
@@ -227,31 +165,18 @@ module.exports = function (passport) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
                                 }
-                                newUser.facebook.email = email; // facebook can return multiple emails so we'll take the first
-
-                                // save our user to the database
+                                newUser.facebook.email = email;
                                 newUser.save(function (err) {
                                     if (err)
                                         throw err;
-
-                                    // if successful, return the new user
                                     return done(null, newUser);
                                 });
-
                             }
-
                         });
                     }
                 });
-
             });
         }));
-
-
-    // =========================================================================
-    // TWITTER =================================================================
-    // =========================================================================
-
     passport.use(new TwitterStrategy({
             consumerKey: configAuth.twitterAuth.consumerKey,
             consumerSecret: configAuth.twitterAuth.consumerSecret,
@@ -265,33 +190,19 @@ module.exports = function (passport) {
             process.nextTick(function () {
 
                 User.findOne({'twitter.id': profile.id}, function (err, user) {
-                    // if there is an error, stop everything and return that
-                    // ie an error connecting to the database
                     if (err) return done(err);
-
-                    // if the user is found then log them in
                     if (user) {
-                        return done(null, user); // user found, return that user
+                        return done(null, user);
                     } else {
-
-
-                        // if there is no user found with that facebook id, check if there is a user with the same email
                         User.findOne({
                             $or: [{'local.email': profile.email || profile.emails[0].value},
                                 {'facebook.email': profile.email || profile.emails[0].value},
                                 {'google.email': profile.email || profile.emails[0].value}
                             ]
                         }, function (err, user) {
-
-                            // if there is an error, stop everything and return that
-                            // ie an error connecting to the database
-
                             if (err)
                                 return done(err);
-
-                            //if user is found , then let's crate an email field for the local account
                             if (user) {
-                                console.log("travato local accunt");
                                 console.log(user);
                                 user.twitter.id = profile.id;
                                 user.twitter.token = token;
@@ -303,19 +214,13 @@ module.exports = function (passport) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
                                 }
-                                user.twitter.email = email; // facebook can return multiple emails so we'll take the first
-                                // save our user to the database
+                                user.twitter.email = email;
                                 user.save(function (err) {
                                     if (err)
                                         throw err;
-
-                                    // if successful, return the new user
                                     return done(null, user);
                                 });
                             } else {
-                                console.log("local accunt non trovate");
-                                // if there is no user found with that facebook id, create them
-                                // if there is no user, create them
                                 let newUser = new User();
                                 newUser.twitter.id = profile.id;
                                 newUser.twitter.token = token;
@@ -327,47 +232,25 @@ module.exports = function (passport) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});
                                 }
-                                newUser.twitter.email = email; // facebook can return multiple emails so we'll take the first
-
-                                // save our user to the database
+                                newUser.twitter.email = email;
                                 newUser.save(function (err) {
                                     if (err)
                                         throw err;
-
-                                    // if successful, return the new user
                                     return done(null, newUser);
                                 });
-
                             }
-
                         });
-
                     }
-
-
                 });
-
             });
         }
     ));
-
-
-    // =========================================================================
-    // GOOGLE ==================================================================
-    // =========================================================================
-
 
     passport.use(new GoogleStrategy({
         clientID: configAuth.googleAuth.clientID,
         clientSecret: configAuth.googleAuth.clientSecret,
         callbackURL: configAuth.googleAuth.callbackURL,
     }, function (token, refreshToken, profile, done) {
-
-        // make the code asynchronous
-        // User.findOne won't fire until we have all our data back from Google
-
-        console.log(profile);
-
         process.nextTick(function () {
 
             User.findOne({'google.id': profile.id}, function (err, user) {
@@ -375,23 +258,14 @@ module.exports = function (passport) {
                 if (err) return done(err);
                 if (user) return done(null, user);
                 else {
-
-
-                    // if there is no user found with that facebook id, check if there is a user with the same email
                     User.findOne({
                         $or: [{'local.email': profile.email || profile.emails[0].value},
                             {'facebook.email': profile.email || profile.emails[0].value},
                             {'twitter.email': profile.email || profile.emails[0].value}
                         ]
                     }, function (err, user) {
-
-                        // if there is an error, stop everything and return that
-                        // ie an error connecting to the database
-
                         if (err)
                             return done(err);
-
-                        //if user is found , then let's crate an email field for the local account
                         if (user) {
                             console.log("travato local accunt");
                             user.google.id = profile.id;
@@ -404,19 +278,13 @@ module.exports = function (passport) {
                                 console.log('this user has no email in his fb');
                                 return done({message: 'this user has no email in his fb'});
                             }
-                            user.google.email = email; // facebook can return multiple emails so we'll take the first
-                            // save our user to the database
+                            user.google.email = email;
                             user.save(function (err) {
                                 if (err)
                                     throw err;
-
-                                // if successful, return the new user
                                 return done(null, user);
                             });
                         } else {
-                            console.log("local accunt non trovate");
-                            // if there is no user found with that facebook id, create them
-                            // if there is no user, create them
                             let newUser = new User();
                             newUser.google.id = profile.id;
                             newUser.google.token = token;
@@ -428,30 +296,16 @@ module.exports = function (passport) {
                                 console.log('this user has no email in his fb');
                                 return done({message: 'this user has no email in his fb'});
                             }
-                            newUser.google.email = email; // facebook can return multiple emails so we'll take the first
-
-                            // save our user to the database
+                            newUser.google.email = email;
                             newUser.save(function (err) {
                                 if (err)
                                     throw err;
-
-                                // if successful, return the new user
                                 return done(null, newUser);
                             });
-
                         }
-
                     });
                 }
-
-
             });
-
-
         });
-
-
     }));
-
-
 };

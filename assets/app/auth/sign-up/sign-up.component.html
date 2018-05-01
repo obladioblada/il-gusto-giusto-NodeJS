@@ -7,8 +7,10 @@
         <mat-card-content>
             <div class="row" style="text-align: center">
                 <div class="col-md-12" style="text-align: center; margin-top: 10px">
-                    <div (click)="openAddFileDialog()">
+                    <div (click)="openUploader()">
                         <i class="material-icons user-login-icon">person</i>
+                        <input type="file" id="imageInput" name="myImage" accept="image/*" style="display:none"
+                               ng2FileSelect [uploader]="uploader"  #imageInput/>
                     </div>
                 </div>
             </div>
@@ -21,7 +23,8 @@
                                    type="text"
                                    id="name"
                                    formControlName="name"
-                                   >
+                                   autocomplete="given-name"
+                            >
                         </mat-form-field>
                         <span *ngIf="!signUpForm.get('name').valid && signUpForm.get('name').touched"
                               class="help-block">inserire un nome</span>
@@ -34,7 +37,9 @@
                                    name="cognome"
                                    type="text"
                                    id="surname"
-                                   formControlName="surname" >
+                                   formControlName="surname"
+                                   autocomplete="family-name"
+                            >
                         </mat-form-field>
                         <span *ngIf="!signUpForm.get('surname').valid && signUpForm.get('surname').touched"
                               class="help-block">inserire un cognome</span>
@@ -47,7 +52,8 @@
                                    placeholder="EMAIL"
                                    type="email"
                                    id="email"
-                                   formControlName="email">
+                                   formControlName="email"
+                                   autocomplete="email">
                         </mat-form-field>
                         <span *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched"
                               class="help-block">email non corretta</span>
@@ -60,6 +66,7 @@
                                    id="password"
                                    type="password"
                                    formControlName="password"
+                                   autocomplete='current-password'
                                    >
                         </mat-form-field>
                         <span *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched"
