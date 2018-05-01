@@ -1,4 +1,4 @@
-.panel-footer{
+.panel-footer {
     background-color: transparent !important;
     position: absolute;
     /* height: 0; */
@@ -10,22 +10,20 @@
     right: 100px;
 }
 
-
-.open{
-  height: 60px;
+.open {
+    height: 60px;
 }
 
-.closed{
-  bottom: 160px;
+.closed {
+    bottom: 160px;
 }
 
-
-.vassoio{
-  float: right !important;
-  margin-right: 10px !important;
+.vassoio {
+    float: right !important;
+    margin-right: 10px !important;
 }
 
-.tot{
+.tot {
     float: right;
     /* padding: 20px; */
     /* margin-right: 22px; */
@@ -34,11 +32,11 @@
     cursor: pointer;
 }
 
-.tot:hover{
-  box-shadow: none;
+.tot:hover {
+    box-shadow: none;
 }
 
-.shop-icon{
+.shop-icon {
     font-size: 35px;
     color: #b33c46;
     /* float: right; */

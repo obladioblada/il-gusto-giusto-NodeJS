@@ -13,26 +13,29 @@ import {VassoioGuardService} from "./services/vassoio-guard.service";
 
 
 const appRoutes: Routes = [
-    {path: '',          component: HomeComponent},
-    {path: 'prenota',   component: MenuComponent,
-                        canActivate: [VassoioGuardService]},
-    {path: 'vassoio',   component: VassoioFormComponent,
-                        canActivate:  [AuthGuardService, VassoioGuardService]},
-    {path: 'chi',       component: ChiSiamoContainerComponent},
-    {path: 'dove',      component: DoveSiamoContainerComponent},
-    {path: 'conferma',  component: ConfirmationComponent},
-    {path: 'signIn',    component: SignInComponent},
-    {path: 'signUp',    component: SignUpComponent},
+    {path: '', component: HomeComponent},
+    {
+        path: 'prenota', component: MenuComponent,
+        canActivate: [VassoioGuardService]
+    },
+    {
+        path: 'vassoio', component: VassoioFormComponent,
+        canActivate: [AuthGuardService, VassoioGuardService]
+    },
+    {path: 'chi', component: ChiSiamoContainerComponent},
+    {path: 'dove', component: DoveSiamoContainerComponent},
+    {path: 'conferma', component: ConfirmationComponent},
+    {path: 'signIn', component: SignInComponent},
+    {path: 'signUp', component: SignUpComponent},
 ];
 
 
-
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes)
-  ],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(appRoutes)
+    ],
+    exports: [RouterModule]
 })
-export  class AppRoutingModule {
+export class AppRoutingModule {
 
 }

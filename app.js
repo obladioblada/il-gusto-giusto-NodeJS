@@ -12,8 +12,7 @@ let passport = require('passport');
 let flash = require('connect-flash');
 
 
-
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -29,9 +28,8 @@ let commerceRoutes = require('./routes/commerce');
 let braintreRoutes = require('./routes/braintree');
 
 // connecting database
-const db_PATH='mongodb://localhost:27017/db';
+const db_PATH = 'mongodb://localhost:27017/db';
 mangoose.connect(db_PATH);
-
 
 
 require('./passportconfig')(passport); // pass passport for configuration
@@ -48,7 +46,8 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
     parameterLimit: 100000,
     limit: '50mb',
-    extended: true}));
+    extended: true
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -64,7 +63,6 @@ app.use(passport.session());
 app.use(flash());
 
 
-
 app.use('/', appRoutes);
 app.use('/user', userRoutes);
 app.use('/products', commerceRoutes);
@@ -72,8 +70,8 @@ app.use('/braintree', braintreRoutes);
 
 
 // catch 404 and forward to error handler (angular)
-app.use(function(req, res, next) {
-  res.render('index');
+app.use(function (req, res, next) {
+    res.render('index');
 });
 
 module.exports = app;

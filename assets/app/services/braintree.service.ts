@@ -5,11 +5,12 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class BraintreeService {
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient) {
+    }
 
-    getClientToken(clientTokenURL: string): Observable<string>{
+    getClientToken(clientTokenURL: string): Observable<string> {
         return this.http
-            .get(clientTokenURL, { responseType: 'json' })
+            .get(clientTokenURL, {responseType: 'json'})
             .map((response: any) => {
                 return response.token;
             })
@@ -19,9 +20,9 @@ export class BraintreeService {
     }
 
     createPurchase(createPurchaseURL: string, nonce: string): Observable<any> {
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
         return this.http
-            .post(createPurchaseURL, { nonce: nonce }, { 'headers': headers })
+            .post(createPurchaseURL, {nonce: nonce}, {'headers': headers})
             .map((response: any) => {
                 return response;
             });

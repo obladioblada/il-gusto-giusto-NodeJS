@@ -15,7 +15,7 @@ router.get("/getclienttoken", function (req, res) {
     gateway.clientToken.generate({}, function (err, response) {
         console.log("generate client token for brain tree");
         console.log(response.clientToken);
-        res.json({token :response.clientToken});
+        res.json({token: response.clientToken});
     });
 });
 

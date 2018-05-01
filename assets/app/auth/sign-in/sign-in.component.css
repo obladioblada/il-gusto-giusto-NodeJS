@@ -1,10 +1,10 @@
-.login-button{
+.login-button {
     width: 100%;
     color: white;
     background-color: #b33c46;
 }
 
-.user-login-icon{
+.user-login-icon {
     margin: auto;
     padding: 10px;
     border-radius: 55%;
@@ -13,32 +13,32 @@
     color: white;
 }
 
-.card-center{
+.card-center {
     min-width: 300px;
     margin: auto;
     position: absolute;
     width: 100%;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
-.signInInput{
+.signInInput {
     width: 80% !important;
 }
 
-.footer-social-login{
+.footer-social-login {
     position: relative;
     text-align: center;
     margin-top: 20px;
 }
 
-.auth-card{
+.auth-card {
     margin: 1px;
     max-width: 400px;
     float: none;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
 }
 
 .icon-social-login {
@@ -46,4 +46,6 @@
     cursor: pointer;
 }
 
-a:hover{text-decoration: none !important;}
+a:hover {
+    text-decoration: none !important;
+}

@@ -4,13 +4,13 @@ import {DOCUMENT} from "@angular/common";
 @Directive({
     selector: '[braintreeDirective]'
 })
-export class BraintreeDirective implements OnInit,OnDestroy{
+export class BraintreeDirective implements OnInit, OnDestroy {
 
     dropInScript: any;
 
-     constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any){
+    constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {
 
-     };
+    };
 
     ngOnInit(): void {
         console.log("directive loaded");

@@ -11,13 +11,16 @@ let cloudinary = require('../cloudinaryconfig');
 let user;
 
 router.post('/signup', upload.single('image'), function (req, res, next) {
-    console.log(req.file.buffer);
+        console.log(req.file.buffer);
         cloudinary.v2.uploader.upload_stream(
             {
                 resource_type: 'image',
-                format: 'jpg',
-                width: 48,
-                height: 48
+                gravity: "face",
+                width: 150,
+                height: 150,
+                zoom: "0.7",
+                crop: "thumb",
+                timeout: 120000,
             },
             function (error, result) {
                 console.log(error);
@@ -103,7 +106,6 @@ router.get('/auth/twitter/callback', passport.authenticate('twitter'), function 
 
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 
-
 router.get('/auth/google/callback', passport.authenticate('google'), function (req, res) {
     let token = jwt.sign({user: req.user}, 'secret', {expiresIn: 7200});
     user = {
@@ -117,8 +119,6 @@ router.get('/auth/google/callback', passport.authenticate('google'), function (r
     });
     res.redirect('/signIn?' + query);
 });
-
-
 router.post('/checkemail', function (req, res, next) {
     User.findOne({'local.email': req.body.email}, function (err, user) {
         if (err) {

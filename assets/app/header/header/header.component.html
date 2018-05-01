@@ -1,7 +1,7 @@
 <div class="hamburger-container" (click)="toggleDropDownMenu()" [ngClass]="showDrowDown? 'change' : ''">
-  <div class="bar1"></div>
-  <div class="bar2"></div>
-  <div class="bar3"></div>
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
 </div>
 <nav class="navbar navbar-light" [ngClass]=" isHome? 'background-home' : 'background-default' ">
 
@@ -12,22 +12,23 @@
             <div class="l3"></div>
         </div>
     </div>
- <app-footer-vassoio></app-footer-vassoio>
+    <app-footer-vassoio></app-footer-vassoio>
     <div *ngIf="isLoggedIn()">
-    <h6 class="login name" style="margin-right: 50px" *ngIf="user!=undefined">{{user.name}}</h6>
+        <h6 class="login name" style="margin-right: 50px" *ngIf="user!=undefined">{{user.name}}</h6>
         <i class="material-icons icon-profile" *ngIf="user.photoUrl===undefined">account_circle</i>
         <img class="photo-profile" *ngIf="user.photoUrl!==undefined" src="{{user.photoUrl}}">
     </div>
     <app-intro></app-intro>
 </nav>
 <div class="app-dropdown" [ngClass]="showDrowDown? 'open' : 'closed'">
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let url of urls">
-        <a class="seventh before after" (click)="onChangePage(url.url)"> {{url.name}} </a>
-    </li>
-    <li class="list-group-item">
-      <a class="seventh before after" style="color: #b33c46" *ngIf="isLoggedIn()" (click)="onLogOut()"> LOGOUT </a>
-    </li>
-  </ul>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let url of urls">
+            <a class="seventh before after" (click)="onChangePage(url.url)"> {{url.name}} </a>
+        </li>
+        <li class="list-group-item">
+            <a class="seventh before after" style="color: #b33c46" *ngIf="isLoggedIn()" (click)="onLogOut()">
+                LOGOUT </a>
+        </li>
+    </ul>
 </div>
 

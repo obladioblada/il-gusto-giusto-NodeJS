@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {User} from "../user.model";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+    selector: 'app-sign-in',
+    templateUrl: './sign-in.component.html',
+    styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
 
@@ -16,43 +16,48 @@ export class SignInComponent implements OnInit {
     signInFormGroup: FormGroup;
     user: User;
 
-    constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
+    constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+    }
 
-   ngOnInit() {
-    this.signInFormGroup = new FormGroup({
-        'email': new FormControl (null, [ Validators.required, Validators.email ], [ this.emailValidator.bind(this)] ),
-        'password': new FormControl(null, [Validators.required, Validators.minLength(5)]),
-      });
+    ngOnInit() {
+        this.signInFormGroup = new FormGroup({
+            'email': new FormControl(null, [Validators.required, Validators.email], [this.emailValidator.bind(this)]),
+            'password': new FormControl(null, [Validators.required, Validators.minLength(5)]),
+        });
 
-    this.route.queryParams.subscribe(
-        (queryParams: Params) =>{
-            if(queryParams['SocialLogin']) {
-                this.authService.fetchSocialDataLogin().subscribe(
-                    data => {
-                        this.normalizedUser(data);
-                        if (this.user != undefined ) this.authService.user = this.user;
-                        this.setToken(data)
-                    },
-                    err => console.log(err)
-                );
+        this.route.queryParams.subscribe(
+            (queryParams: Params) => {
+                if (queryParams['SocialLogin']) {
+                    this.authService.fetchSocialDataLogin().subscribe(
+                        data => {
+                            this.normalizedUser(data);
+                            if (this.user != undefined) this.authService.user = this.user;
+                            this.setToken(data)
+                        },
+                        err => console.log(err)
+                    );
+                }
             }
-        }
-    );
-   }
+        );
+    }
 
-   // check if email exist in db
-    emailValidator( control: FormControl){
+    // check if email exist in db
+    emailValidator(control: FormControl) {
         const email = control.value;
-        const promise = new Promise<any>((resolve , reject) =>{
+        const promise = new Promise<any>((resolve, reject) => {
             this.authService.checkIfEmailExist(email)
                 .subscribe(
                     data => {
-                        if(data.emailFound){resolve(null);}
-                        else {resolve({error:'error email not used'});}
+                        if (data.emailFound) {
+                            resolve(null);
+                        }
+                        else {
+                            resolve({error: 'error email not used'});
+                        }
                         resolve(null)
                     },
                     error => {
-                       console.log('error email ');
+                        console.log('error email ');
                     })
         });
 
@@ -61,7 +66,7 @@ export class SignInComponent implements OnInit {
     }
 
 
-    onSubmit(){
+    onSubmit() {
         const email = this.signInFormGroup.value.email;
         const password = this.signInFormGroup.value.password;
         const user = new User(email, password);
@@ -72,7 +77,7 @@ export class SignInComponent implements OnInit {
             );
     }
 
-    setToken(data){
+    setToken(data) {
 
         localStorage.setItem('token', data.token);
         localStorage.setItem('userId', data.user._id);
@@ -81,9 +86,9 @@ export class SignInComponent implements OnInit {
         this.router.navigate(['/prenota']);
     }
 
-    normalizedUser(data){
+    normalizedUser(data) {
         this.user = new User("");
-        switch (data.social){
+        switch (data.social) {
             case "facebook" :
                 this.user = new User(
                     data.user.facebook.email,
@@ -96,13 +101,13 @@ export class SignInComponent implements OnInit {
                 break;
             case "twitter" :
                 this.user = new User(
-                     data.user.twitter.email,
+                    data.user.twitter.email,
                     null,
-                     data.user.twitter.name,
+                    data.user.twitter.name,
                     null,
                     null,
-                     data.user.twitter.photoUrl,
-                     data.user.twitter.id);
+                    data.user.twitter.photoUrl,
+                    data.user.twitter.id);
                 break;
             case "google" :
                 this.user = new User(
@@ -118,7 +123,6 @@ export class SignInComponent implements OnInit {
 
         }
     }
-
 
 
 }

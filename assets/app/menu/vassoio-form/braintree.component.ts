@@ -5,8 +5,8 @@ let dropin = require('braintree-web-drop-in');
 
 @Component({
     selector: 'app-braintree',
-    templateUrl:'./braintree.component.html',
-    styleUrls:['./braintree.component.css']
+    templateUrl: './braintree.component.html',
+    styleUrls: ['./braintree.component.css']
 })
 export class BraintreeComponent implements OnInit {
 
@@ -23,20 +23,23 @@ export class BraintreeComponent implements OnInit {
     @Input() buttonText = 'Buy';
 
 
-    constructor(private btService: BraintreeService){};
+    constructor(private btService: BraintreeService) {
+    };
 
-     ngOnInit(): void {
-         this.btService
-             .getClientToken(this.clientTokenURL)
-             .subscribe((clientToken: string) => {
-                 this.clientToken = clientToken;
-                 this.clientTokenNotReceived = false;
-                 this.interval = setInterval(() => { this.createDropin(); }, 0);
-             }, (error) => {
-                 this.clientTokenNotReceived = true;
-                 console.log(`Client token not received. Please make sure your braintree server api is configured properly, running and accessible.`);
-             });
-     }
+    ngOnInit(): void {
+        this.btService
+            .getClientToken(this.clientTokenURL)
+            .subscribe((clientToken: string) => {
+                this.clientToken = clientToken;
+                this.clientTokenNotReceived = false;
+                this.interval = setInterval(() => {
+                    this.createDropin();
+                }, 0);
+            }, (error) => {
+                this.clientTokenNotReceived = true;
+                console.log(`Client token not received. Please make sure your braintree server api is configured properly, running and accessible.`);
+            });
+    }
 
     createDropin() {
         if (typeof dropin !== 'undefined') {
@@ -75,8 +78,8 @@ export class BraintreeComponent implements OnInit {
         }
     }
 
-    onPaymentStatus($event){
-         console.log($event);
+    onPaymentStatus($event) {
+        console.log($event);
     }
 
 }

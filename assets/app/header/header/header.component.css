@@ -1,215 +1,215 @@
-ul{
-  margin: auto;
+ul {
+    margin: auto;
 }
 
-nav{
-  margin: 0;
-}
-a{
-  text-decoration: none !important;
-  font-size: large;
-  transition: all 1s;
-  color: #9ad8ed;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 20px;
+nav {
+    margin: 0;
 }
 
-a:hover{
-  box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0px 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
-  padding: 20px;
+a {
+    text-decoration: none !important;
+    font-size: large;
+    transition: all 1s;
+    color: #9ad8ed;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 20px;
+}
+
+a:hover {
+    box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
+    padding: 20px;
 
 }
 
-.navbar{
-  position: fixed;
-  max-height: 60px;
-  min-height: 60px;
-  border: none;
-  border-radius: 0;
-  width: 100%;
-  z-index: 10000000;
-  box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0px 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
+.navbar {
+    position: fixed;
+    max-height: 60px;
+    min-height: 60px;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    z-index: 10000000;
+    box-shadow: rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 0 0 0, rgba(0, 0, 0, 0.2) 0 2px 4px -1px;
 }
-
 
 .navbar-header {
-  float: left;
-  padding: 15px;
-  text-align: center;
-  width: 100%;
-}
-.navbar-brand {float:none;}
-
-.background-home{
-  background-color: white;
-  animation-name: changeNavBg;
-  animation-duration: 3s;
-  animation-delay: 6s;
-  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
-  -moz-animation-fill-mode:forwards; /*FF 5+*/
-  -o-animation-fill-mode:forwards; /*Not implemented yet*/
-  animation-fill-mode:forwards; /*when the spec is finished*/
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
 }
 
-.background-default{
-  background-color: white;
+.navbar-brand {
+    float: none;
 }
 
+.background-home {
+    background-color: white;
+    animation-name: changeNavBg;
+    animation-duration: 3s;
+    animation-delay: 6s;
+    -webkit-animation-fill-mode: forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation-fill-mode: forwards; /*FF 5+*/
+    -o-animation-fill-mode: forwards; /*Not implemented yet*/
+    animation-fill-mode: forwards; /*when the spec is finished*/
+}
+
+.background-default {
+    background-color: white;
+}
 
 /* The animation code */
 @keyframes changeNavBg {
-  from {background-color: #9ad8ed;}
-  to {background-color: white;}
+    from {
+        background-color: #9ad8ed;
+    }
+    to {
+        background-color: white;
+    }
 }
 
 .toggleButton {
-  margin: 25px;
-  font-size: 40px;
-  float: right;
-  cursor: pointer;
-  color: #9ad8ed;
+    margin: 25px;
+    font-size: 40px;
+    float: right;
+    cursor: pointer;
+    color: #9ad8ed;
 }
 
 /* The animation code */
 @keyframes changeToogleColor {
-  from {color: white;}
-  to {color: #9ad8ed;}
+    from {
+        color: white;
+    }
+    to {
+        color: #9ad8ed;
+    }
 }
 
-
-.app-dropdown{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 1000000000;
-  transition: 0.3s;
+.app-dropdown {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1000000000;
+    transition: 0.3s;
 }
 
-.app-dropdown.open{
-  visibility: visible;
-  opacity: 100;
+.app-dropdown.open {
+    visibility: visible;
+    opacity: 100;
 
 }
 
-.app-dropdown.closed{
-  visibility: hidden;
-  opacity: 0;
-  height: 0;
+.app-dropdown.closed {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
 }
 
-.list-group{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-200px,-200px);
-  width: 400px;
-}
-.list-group-item{
-  border: none;
-  text-align: center !important;
-  margin: 50px;
+.list-group {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-200px, -200px);
+    width: 400px;
 }
 
+.list-group-item {
+    border: none;
+    text-align: center !important;
+    margin: 50px;
+}
 
 /* hamburger css */
 
-
 .hamburger-container {
-  display: inline-block;
-  cursor: pointer;
-  font-size: 17px;
-  float: right;
-  color: #9ad8ed;
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  z-index: 100000000000;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 17px;
+    float: right;
+    color: #9ad8ed;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    z-index: 100000000000;
 }
 
-.hamburger-container:hover>.bar1,.hamburger-container:hover>.bar2,.hamburger-container:hover>.bar3{
-  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-;
+.hamburger-container:hover > .bar1, .hamburger-container:hover > .bar2, .hamburger-container:hover > .bar3 {
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, .2), 0px 4px 3px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);;
 }
 
 .bar1, .bar2, .bar3 {
-  width: 35px;
-  height: 5px;
-  background-color: #9ad8ed;
-  margin: 6px 0;
-  transition: 0.2s;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    width: 35px;
+    height: 5px;
+    background-color: #9ad8ed;
+    margin: 6px 0;
+    transition: 0.2s;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
-
 
 /*.bar1:hover, .bar2:hover, .bar3:hover {
   box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }*/
 
-
-
-
 /* Rotate first bar */
 .change .bar1 {
-  -webkit-transform: rotate(-45deg) translate(-8px, 12px);
-  transform: rotate(-405deg) translate(-8px, 12px);
+    -webkit-transform: rotate(-45deg) translate(-8px, 12px);
+    transform: rotate(-405deg) translate(-8px, 12px);
 
 }
 
-
 /* Fade out the second bar */
 .change .bar2 {
-  -webkit-transform: rotate(45deg) translate(4px, 0px) ;
-  transform: rotate(45deg) translate(4px, 0px) ;
+    -webkit-transform: rotate(45deg) translate(4px, 0px);
+    transform: rotate(45deg) translate(4px, 0px);
 }
 
 /* Rotate last bar */
 .change .bar3 {
-  height: 100vh;
-  width: 5px;
-  transform: translate(18px, 10px);
-  transition: 0.3s;
+    height: 100vh;
+    width: 5px;
+    transform: translate(18px, 10px);
+    transition: 0.3s;
 }
 
-
-.no-scroll{
-  overflow: hidden !important;
+.no-scroll {
+    overflow: hidden !important;
 }
 
-.scroll{
-  overflow: auto;
+.scroll {
+    overflow: auto;
 }
 
-
-.login{
-  cursor: pointer;
-  float: right;
-  margin-right: 70px;
-  top: 18px;
-  text-align: center;
+.login {
+    cursor: pointer;
+    float: right;
+    margin-right: 70px;
+    top: 18px;
+    text-align: center;
 }
 
-.login-logout-icon{
-  width:25px;
-  cursor: pointer;
-  margin-right: 60px;
+.login-logout-icon {
+    width: 25px;
+    cursor: pointer;
+    margin-right: 60px;
 }
 
-.bg-circle{
-  width: 35px;
-  height: 35px;
-  border-radius: 50px;
-  margin-top: 12px;
-  cursor: pointer;
-  background-color: #b33c46;
-  color: white;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  transition: all 1s;
+.bg-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    margin-top: 12px;
+    cursor: pointer;
+    background-color: #b33c46;
+    color: white;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    transition: all 1s;
 }
 
-.bg-circle:hover{
-  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+.bg-circle:hover {
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, .2), 0 4px 3px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
 }
 
 .bg-circle:hover > .l1 {
@@ -217,69 +217,68 @@ a:hover{
 
 .bg-circle:hover > .l2 {
 
- }
+}
 
 .bg-circle:hover > .l3 {
 }
 
-.l1,.l2,.l3{
-  height: 2px;
-  background: white;
-  position: absolute;
-  border-radius: 2px;
-  box-shadow: 0px 5px 7px 0px rgba(0,0,0,.2), 0px 4px 3px 0px rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  transition: all 1s;
+.l1, .l2, .l3 {
+    height: 2px;
+    background: white;
+    position: absolute;
+    border-radius: 2px;
+    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, .2), 0 4px 3px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    transition: all 1s;
 }
 
-.l1{
-  margin-left: 9px;
-  margin-top: 17px;
-  width: 14px;
+.l1 {
+    margin-left: 9px;
+    margin-top: 17px;
+    width: 14px;
 }
 
-.l2{
-  transform: rotate(45deg);
-  margin-top: 14px;
-  margin-left: 19px;
-  width: 10px;
+.l2 {
+    transform: rotate(45deg);
+    margin-top: 14px;
+    margin-left: 19px;
+    width: 10px;
 }
 
-.l3{
-  transform: rotate(-45deg);
-  margin-top: 20px;
-  margin-left: 19px;
-  width: 10px;
+.l3 {
+    transform: rotate(-45deg);
+    margin-top: 20px;
+    margin-left: 19px;
+    width: 10px;
 }
 
-
-.login-logout-text{
-  color: #b33c46;
+.login-logout-text {
+    color: #b33c46;
 }
 
-.name{
-  color: #9ad9ed;
-  top: 10px;
+.name {
+    color: #9ad9ed;
+    top: 10px;
 }
 
-.icon-profile{
-  color: #9ad9ed;
-  top: 11px;
-  font-size: 40px;
-  position: absolute;
-  right: 60px;
-  cursor: pointer
+.icon-profile {
+    color: #9ad9ed;
+    top: 11px;
+    font-size: 40px;
+    position: absolute;
+    right: 60px;
+    cursor: pointer
 }
 
-.photo-profile{
-  color: #9ad9ed;
-  top: 10px;
-  position: absolute;
-  right: 60px;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 40px;
+.photo-profile {
+    color: #9ad9ed;
+    top: 10px;
+    position: absolute;
+    right: 60px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
 }
 
-h6{
-  margin: 0 !important;
+h6 {
+    margin: 0 !important;
 }

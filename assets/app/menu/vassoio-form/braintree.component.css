@@ -9,7 +9,8 @@ button {
     cursor: pointer;
     margin: 30px;
 }
-.error{
+
+.error {
     color: #D8000C;
     background-color: #FFBABA;
     border: none;

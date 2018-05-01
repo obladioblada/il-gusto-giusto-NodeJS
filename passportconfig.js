@@ -41,7 +41,7 @@ module.exports = function (passport) {
                         if (userPojo.hasOwnProperty('local')) {
                             return done(null, false, {'signUpMessage': 'the email is already taken'});
                         }
-                        if (userPojo.hasOwnProperty('facebbok')  || userPojo.hasOwnProperty('twitter') ||
+                        if (userPojo.hasOwnProperty('facebbok') || userPojo.hasOwnProperty('twitter') ||
                             userPojo.hasOwnProperty('google')) {
                             console.log("trovato user con account social");
                             user.local.name = req.body.name;
@@ -60,7 +60,7 @@ module.exports = function (passport) {
                     }
                     else {
                         console.log(req);
-                        cloudinary.uploader.upload(req.body.photoSrc, function(result) {
+                        cloudinary.uploader.upload(req.body.photoSrc, function (result) {
                             console.log(result)
                         });
                         const newUser = new User();
@@ -106,7 +106,7 @@ module.exports = function (passport) {
                 // all is well, return successful user
                 return done(null, user);
             });
-    }));
+        }));
 
     passport.use(new FacebookStrategy({
             clientID: configAuth.facebookAuth.clientID,
@@ -140,7 +140,7 @@ module.exports = function (passport) {
                                 user.facebook.name = profile.name.givenName;
                                 user.facebook.surname = profile.name.familyName;
                                 user.facebook.photoUrl = profile.photos[0].value;
-                                var email = profile.email || profile.emails[0].value;
+                                let email = profile.email || profile.emails[0].value;
                                 if (!email) {
                                     console.log('this user has no email in his fb');
                                     return done({message: 'this user has no email in his fb'});

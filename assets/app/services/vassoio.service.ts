@@ -19,7 +19,7 @@ export class VassoioService {
         this.loadFromLocalStorage();
     }
 
-    onElementAdded(elem:Prodotto) {
+    onElementAdded(elem: Prodotto) {
         if (this.checkIfExist(elem) > -1) {
             console.log("l'elemento esiste");
             // elemente gia inserito, aggiorno la sua quanttà
@@ -99,10 +99,10 @@ export class VassoioService {
     }
 
     saveOnLocalStorage() {
-            localStorage.setItem('vassoio', JSON.stringify(this.vassoio));
-            localStorage.setItem('elements', JSON.stringify(this.elements));
-            localStorage.setItem('count_carrello_element', JSON.stringify(this.count_carrello_element));
-            localStorage.setItem('totale', JSON.stringify(this.totale));
+        localStorage.setItem('vassoio', JSON.stringify(this.vassoio));
+        localStorage.setItem('elements', JSON.stringify(this.elements));
+        localStorage.setItem('count_carrello_element', JSON.stringify(this.count_carrello_element));
+        localStorage.setItem('totale', JSON.stringify(this.totale));
     }
 
     loadFromLocalStorage() {
@@ -122,14 +122,14 @@ export class VassoioService {
         console.log(this.vassoio);
     }
 
-    checkIfExist(o:any){
+    checkIfExist(o: any) {
         let i = 0;
-        for (let e of this.elements){
-            if (e.name === o.name && e.descrizione === o.descrizione && e.prezzo == o.prezzo){
+        for (let e of this.elements) {
+            if (e.name === o.name && e.descrizione === o.descrizione && e.prezzo == o.prezzo) {
                 return i;
             }
         }
-       return -1;
+        return -1;
     }
 }
 
